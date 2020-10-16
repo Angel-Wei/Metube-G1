@@ -1,6 +1,10 @@
 <?php
 include "mysqlClass.inc.php";
 
+// used by register.php
+function check_user_exist{
+	
+}
 // used by login.php
 function user_pass_check($username, $password)
 {

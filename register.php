@@ -1,8 +1,8 @@
 <link rel="stylesheet" type="text/css" href="css/default.css" />
 <?php
-  echo "Hello PHP! I'm on branch anqi";
+session_start();
+include_once "function.php";
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -38,8 +38,8 @@
     </label>
 
     <div class="clearfix">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      <button type="submit" class="signupbtn">Sign Up</button>
+      <button style="margin-left: 50px;background-color: #4CAF50;" type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      <button style="background-color: #f44336;"type="submit" class="signupbtn">Sign Up</button>
     </div>
   </form>
   </div>
