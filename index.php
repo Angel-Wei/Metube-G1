@@ -15,10 +15,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<link rel="favicon" href="assets/images/favicon.png">
 	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/css/font-awesome.min.css"> 
-	<link rel="stylesheet" href="assets/css/bootstrap-theme.css" media="screen"> 
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap-theme.css" media="screen">
 	<link rel="stylesheet" href="assets/css/style.css">
-    <link rel='stylesheet' id='camera-css'  href='assets/css/camera.css' type='text/css' media='all'> 
+    <link rel='stylesheet' id='camera-css'  href='assets/css/camera.css' type='text/css' media='all'>
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
 	<script src="assets/js/html5shiv.js"></script>
@@ -34,24 +34,35 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
 				<a class="navbar-brand" href="index.html">
 					<img src="assets/images/logo.png" alt="Techro HTML5 template"></a>
+					<input type="text" style="margin-top:10px;margin-left:30px" size="25" placeholder="Search..">
+
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right mainNav">
-					<li class="active"><a href="index.html">Home</a></li>
-					<li><a href="about.html">About</a></li>
-					<li><a href="services.html">Services</a></li>
-					<li><a href="price.html">Price</a></li>
-					<li><a href="projects.html">Projects</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="sidebar-right.html">Right Sidebar</a></li>
-							<li><a href="#">Dummy Link1</a></li>
-							<li><a href="#">Dummy Link2</a></li>
-							<li><a href="#">Dummy Link3</a></li>
-						</ul>
-					</li>
-					<li><a href="contact.html">Contact</a></li>
+					<?php
+					session_start();
+					// require("login.php");
+					if (isset($_POST['username'])) {
+						echo "
+						<li class='dropdown'>
+							<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Profile <b class='caret'></b></a>
+							<ul class='dropdown-menu'>
+								<li><a href='sidebar-right.html'>Right Sidebar</a></li>
+								<li><a href='#'>Dummy Link1</a></li>
+								<li><a href='#'>Dummy Link2</a></li>
+								<li><a href='#'>Dummy Link3</a></li>
+							</ul>
+						</li>
+
+						";
+					}
+					else {
+						echo "
+							<li><a href='login.php' style='border:1px;border-style:solid; border-radius: 25px; border-color:#9a496b;'   >Login</a></li>
+							<li><a href='register.php'>Register</a></li>
+							";
+					}
+					?>
 
 				</ul>
 			</div>
@@ -66,23 +77,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="fluid_container">
                     <div class="camera_wrap camera_emboss pattern_1" id="camera_wrap_4">
                         <div data-thumb="assets/images/slides/thumbs/img1.jpg" data-src="assets/images/slides/img1.jpg">
-                        </div> 
+                        </div>
                         <div data-thumb="assets/images/slides/thumbs/img2.jpg" data-src="assets/images/slides/img2.jpg">
                         </div>
                         <div data-thumb="assets/images/slides/thumbs/img3.jpg" data-src="assets/images/slides/img3.jpg">
-                        </div> 
+                        </div>
                     </div><!-- #camera_wrap_3 -->
                 </div><!-- .fluid_container -->
 		</div>
 	</header>
 	<!-- /Header -->
 
-  
+
       <section class="news-box top-margin">
         <div class="container">
             <h2><span>We Offer..</span></h2>
             <div class="row">
-       
+
                 <div class="col-lg-4 col-md-4 col-sm-12">
                     <div class="newsBox">
                         <div class="thumbnail">
@@ -140,23 +151,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div>
         </div>
     </section>
-   
-  
+
+
       <section class="container">
       <div class="row">
-      	<div class="col-md-4"><div class="title-box clearfix "><h2 class="title-box_primary">About Us</h2></div> 
+      	<div class="col-md-4"><div class="title-box clearfix "><h2 class="title-box_primary">About Us</h2></div>
         <p><span>Perspiciatis unde omnis iste natus error sit voluptatem. Cum sociis natoque penatibus et magnis dis parturient montes ascetur ridiculus musull dui.</span></p>
         <p>Lorem ipsumulum aenean noummy endrerit mauris. Cum sociis natoque penatibus et magnis dis parturient montes ascetur ridiculus mus. Null dui. Fusce feugiat malesuada odio.</p>
         <a href="#" title="read more" class="btn-inline " target="_self">read more</a> </div>
-        
-      
-         <div class="col-md-4"><div class="title-box clearfix "><h2 class="title-box_primary">Clients</h2></div> 
+
+
+         <div class="col-md-4"><div class="title-box clearfix "><h2 class="title-box_primary">Clients</h2></div>
             <blockquote class="blockquote-1">
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid</p>
 					<small>Someone famous in <cite title="Source Title">Source Title</cite></small>
 				</blockquote></div>
-          
-          <div class="col-md-4"><div class="title-box clearfix "><h2 class="title-box_primary">Projects</h2></div> 
+
+          <div class="col-md-4"><div class="title-box clearfix "><h2 class="title-box_primary">Projects</h2></div>
             <div class="list styled custom-list">
             <ul>
             <li><a title="Snatoque penatibus et magnis dis partu rient montes ascetur ridiculus mus." href="#">Singapore Township Complete Interior Design</a></li>
@@ -170,7 +181,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
          </div>
       </div>
       </section>
-      
+
     <section class="container">
 <div class="row">
 <div class="col-md-12">
@@ -220,7 +231,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </div>
                         </li>
                     </ul>
-              </div><!-- /Slide1 --> 
+              </div><!-- /Slide1 -->
             <div class="item">
                     <ul class="thumbnails">
                         <li class="col-md-3">
@@ -264,7 +275,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </div>
                         </li>
                     </ul>
-              </div><!-- /Slide2 --> 
+              </div><!-- /Slide2 -->
             <div class="item">
                     <ul class="thumbnails">
                         <li class="col-md-3">
@@ -308,20 +319,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </div>
                         </li>
                     </ul>
-              </div><!-- /Slide3 --> 
+              </div><!-- /Slide3 -->
         </div>
-        
-        <div class="control-box">                            
+
+        <div class="control-box">
             <a data-slide="prev" href="#myCarousel" class="carousel-control left">‹</a>
             <a data-slide="next" href="#myCarousel" class="carousel-control right">›</a>
-        </div><!-- /.control-box -->   
-                              
+        </div><!-- /.control-box -->
+
     </div><!-- /#myCarousel -->
-        
-</div><!-- /.span12 -->          
-</div><!-- /.row --> 
+
+</div><!-- /.span12 -->
+</div><!-- /.row -->
 </section><!-- /.container -->
-		 
+
     <footer id="footer">
 		<div class="container">
 			<div class="social text-center">
@@ -342,7 +353,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="col-md-6 panel">
 						<div class="panel-body">
 							<p class="simplenav">
-								<a href="index.html">Home</a> | 
+								<a href="index.html">Home</a> |
 								<a href="about.html">About</a> |
 								<a href="services.html">Services</a> |
 								<a href="price.html">Price</a> |
@@ -367,18 +378,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</footer>
 
 	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
-	<script src="assets/js/modernizr-latest.js"></script> 
+	<script src="assets/js/modernizr-latest.js"></script>
 	<script type='text/javascript' src='assets/js/jquery.min.js'></script>
     <script type='text/javascript' src='assets/js/fancybox/jquery.fancybox.pack.js'></script>
-    
+
     <script type='text/javascript' src='assets/js/jquery.mobile.customized.min.js'></script>
-    <script type='text/javascript' src='assets/js/jquery.easing.1.3.js'></script> 
-    <script type='text/javascript' src='assets/js/camera.min.js'></script> 
-    <script src="assets/js/bootstrap.min.js"></script> 
+    <script type='text/javascript' src='assets/js/jquery.easing.1.3.js'></script>
+    <script type='text/javascript' src='assets/js/camera.min.js'></script>
+    <script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/custom.js"></script>
     <script>
 		jQuery(function(){
-			
+
 			jQuery('#camera_wrap_4').camera({
 				height: '600',
 				loader: 'bar',
@@ -391,6 +402,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 		});
 	</script>
-    
+
 </body>
 </html>
