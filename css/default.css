@@ -1,0 +1,65 @@
+body {font-family: Helvetica;}
+* {box-sizing: border-box}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  font-family: Helvetica;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.resetbtn {
+  font-family: Helvetica;
+  font-size: 15;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  font-family: Helvetica;
+  font-size: 15;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+     width: 100%;
+  }
+}
+
+#passwd_result{
+	background:#FF9900;
+	color:#FFFFFF;
+	font-weight:bold;
+	margin-right:60%;
+}
+
+#upload_result{
+	background:#CC3300;
+	color:#FFFFFF;
+	font-weight:bold;
+	margin-right:60%;
+}
