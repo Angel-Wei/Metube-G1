@@ -35,7 +35,7 @@ if(isset($_POST['submit'])) {
 		<img src="img/logo.png" class="center" alt="Logo of MeTube" style="width:345px;height:131px;">
   </div>
   <div style="text-align:center; width:40%; height:50%; border: 3px solid #51adcf; margin:0 auto;">
-		<form method="post" action="login.php" style="text-align:center">
+		<form method="post" action="index.php" style="text-align:center">
     <h1 align="middle">Log In</h1>
     <h3 align="middle">Welcome back! Log in to access the MeTube.</h3><br>
 
