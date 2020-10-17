@@ -5,20 +5,24 @@ session_start();
 include_once "function.php";
 
 if(isset($_POST['submit'])) {
-	if($_POST['username'] == "" || $_POST['password'] == ""){
+	$username = mysql_real_escape_string($_POST['username']);
+  $password = mysql_real_escape_string($_POST['password']);
+	if($username == "" || $password == ""){
 		$login_error = "One or more fields are missing.";
 	}
 	else{
-		$check = user_pass_check($_POST['username'],$_POST['password']); // Call functions from function.php
+		$check = user_pass_check($username,$password); // Call functions from function.php
 		if($check == 1){
-			$login_error = "User ".$_POST['username']." not found.";
+			$login_error = "User ".$username." not found.";
 		}
 		elseif($check==2){
 			$login_error = "Incorrect password.";
 		}
 		else if($check==0){
-			$_SESSION['username']=$_POST['username']; //Set the $_SESSION['username']
-			header('Location: browse.php');
+			$_SESSION['username']=$username; //Set the $_SESSION['username']
+			$_SESSION['id']=mysql_insert_id();; //Set the $_SESSION['username']
+			$_SESSION['success'] = "You are now logged in";
+			header('Location: index.php');
 		}
 	}
 }
@@ -35,7 +39,7 @@ if(isset($_POST['submit'])) {
 		<img src="img/logo.png" class="center" alt="Logo of MeTube" style="width:345px;height:131px;">
   </div>
   <div style="text-align:center; width:40%; height:50%; border: 3px solid #51adcf; margin:0 auto;">
-		<form method="post" action="index.php" style="text-align:center">
+		<form method="post" action="login.php" style="text-align:center">
     <h1 align="middle">Log In</h1>
     <h3 align="middle">Welcome back! Log in to access the MeTube.</h3><br>
 
@@ -53,6 +57,7 @@ if(isset($_POST['submit'])) {
 		</form>
   </div>
 </body>
+</html>
 
 <?php
 if(isset($login_error)){
