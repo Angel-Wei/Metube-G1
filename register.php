@@ -1,7 +1,6 @@
 <link rel="stylesheet" type="text/css" href="css/default.css" />
 <?php
-session_start();
-include_once "function.php";
+include "register_check.php";
 ?>
 
 <!DOCTYPE html>
@@ -15,11 +14,10 @@ include_once "function.php";
   <div style="text-align:center;">
 		<img src="img/logo.png" class="center" alt="Logo of MeTube" style="width:345px;height:131px;">
   </div>
-  <div style="text-align:left; width:40%; height:60%; border: 3px solid #fcbf1e; margin:0 auto;">
-  <form method="post" class="modal-content" action="<?php echo "login.php"; ?>" >
+  <div style="text-align:left; width:40%; height:65%; border: 3px solid #fcbf1e; margin:0 auto;">
+  <form method="post" class="modal-content" action="register.php" >
     <h1 align="middle">Sign Up</h1>
-    <h3 align="middle">Please fill in this form to create an account.</h3>
-    <hr>
+    <h3 align="middle">Please fill in this form to create an account.</h3><br>
 
     <label style="padding-left:150px;" for="usrname" align="middle"><b>Username</b></label>
     <input type="text" name="username" placeholder="Enter Username"><br><br>
@@ -27,20 +25,23 @@ include_once "function.php";
     <label style="padding-left:150px;" for="psw"><b>Password</b></label>
     <input type="password" name="psw" placeholder="Enter Password"><br><br>
 
-    <label style="padding-left:150px;" for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" name="psw-repeat" placeholder="Repeat Password"><br><br>
+    <label style="padding-left:150px;" for="psw_repeat"><b>Repeat Password</b></label>
+    <input type="password" name="psw_repeat" placeholder="Repeat Password"><br><br>
 
     <label style="padding-left:150px;" for="email"><b>Email</b></label>
     <input type="text" name="email" placeholder="Enter Email"><br><br>
 
-    <label style="padding-left:145px;">
-    <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-    </label>
+    <label style="padding-left:150px;" for="sex"><b>Sex</b></label>
+    <input type="radio" name="sex" value="Male"> Male
+    <input type="radio" name="sex" value="Female" > Female<br>
 
-    <div class="clearfix">
-      <button style="margin-left: 50px;background-color: #4CAF50;" type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      <button style="background-color: #f44336;"type="submit" class="signupbtn">Sign Up</button>
+    <p style="padding-left:10px;">Note: The username is 4 characters minimum; the password is 6 characters minimum (numbers or letters, no special characters allowed.)</p>
+
+    <div>
+      <input name="reset" class="signupbtn" style="margin-left:185px;height:40px;width:80px;color:white;background-color: #4CAF50;" type="reset" value="Cancel">
+      <input name="submit" class="resetbtn" style="margin-left: 50px;height:40px;width:80px;color:white;background-color: #f44336;" type="submit" value="Sign Up">
     </div>
   </form>
   </div>
 </body>
+</html>

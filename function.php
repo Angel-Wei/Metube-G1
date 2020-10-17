@@ -1,16 +1,58 @@
 <?php
 include "mysqlClass.inc.php";
 
-// used by register.php
-function check_user_exist{
-	
+// used by register_check.php
+function check_user_exist($username,$email){
+	$query1 = "select * from account where username='$username'";
+	$result1 = mysql_query($query1)
+		or die ("check_user_exist() failed. Could not query the database: <br />". mysql_error());
+	$count1 = mysql_num_rows($result1);
+
+	$query2 = "select * from account where email='$email'";
+	$result2 = mysql_query($query2)
+		or die ("check_user_exist() failed. Could not query the database: <br />". mysql_error());
+	$count2 = mysql_num_rows($result2);
+
+	if ($count1==0 and $count2!=0){
+		echo '<script type="text/javascript">';
+		echo 'alert("'. $email.' already exists.Please use a different email address.")';
+		echo '</script>';
+		return 1;
+	}
+
+	if ($count1!=0){
+		echo '<script type="text/javascript">';
+		echo 'alert("'. $username.' already exists.Please create a new username.")';
+		echo '</script>';
+		return 2;
+	}
+
+	if ($count1==0 and $count2==0){
+		return 0;
+	}
+	mysql_free_result($result); // free memory and close connection
 }
+
+
+// used by register_check.php
+function insert_usr($username, $psw, $email, $sex){
+	$query  = "INSERT INTO `account` (`username`, `password`,`email`, `sex`)
+		VALUES ('$username','$psw','$email','$sex')";
+	$result = mysql_query($query);
+	if (!$result)
+	{
+	   die ("insert_usr() failed. Could not query the database: <br />". mysql_error());
+	}
+	return 1;
+	mysql_free_result($result); // free memory and close connection
+}
+
 // used by login.php
 function user_pass_check($username, $password)
 {
 
 	$query = "select * from account where username='$username'";
-	$result = mysql_query( $query );
+	$result = mysql_query($query);
 
 	if (!$result)
 	{
@@ -22,7 +64,7 @@ function user_pass_check($username, $password)
 		elseif ($row[0]!=$username) return 1; // unmatched username;
 		elseif ($row[1]!=$password) return 2; // wrong password;
 	}
-	mysql_free_memory($result); // free memory and close connection
+	mysql_free_result($result); // free memory
 }
 
 function updateMediaTime($mediaid)
