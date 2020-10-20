@@ -2,7 +2,7 @@
 <?php
 session_start();
 
-include_once "function.php";
+include_once "../function.php";
 
 if(isset($_POST['submit'])) {
 	$username = mysql_real_escape_string($_POST['username']);
@@ -22,7 +22,7 @@ if(isset($_POST['submit'])) {
 			$_SESSION['username']=$username; //Set the $_SESSION['username']
 			$_SESSION['id']=mysql_insert_id();; //Set the $_SESSION['username']
 			$_SESSION['success'] = "You are now logged in";
-			header('Location: index.php');
+			header('Location: ../index.php');
 		}
 	}
 }
@@ -36,7 +36,7 @@ if(isset($_POST['submit'])) {
 <head>
 <body>
   <div style="text-align:center;">
-		<img src="img/logo.png" class="center" alt="Logo of MeTube" style="width:345px;height:131px;">
+		<img src="../img/logo.png" class="center" alt="Logo of MeTube" style="width:345px;height:131px;">
   </div>
   <div style="text-align:center; width:40%; height:50%; border: 3px solid #51adcf; margin:0 auto;">
 		<form method="post" action="login.php" style="text-align:center">
