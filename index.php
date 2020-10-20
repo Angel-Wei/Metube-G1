@@ -32,25 +32,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="navbar-header">
 				<!-- Button for smallest screens -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="index.html">
-					<img src="assets/images/logo.png" alt="Techro HTML5 template"></a>
-					<input type="text" style="margin-top:10px;margin-left:30px" size="25" placeholder="Search..">
 
+				<a class="navbar-brand" href="index.php">
+					<img src="assets/images/logo.png" alt="MeTube"></a>
+					<input type="text" style="margin-top:10px;margin-left:30px" size="25" placeholder="Search..">
 			</div>
+
+
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right mainNav">
 					<?php
 					session_start();
-					// require("login.php");
-					if (isset($_POST['username'])) {
+					if (isset($_SESSION['username']) && isset($_SESSION['success'])) {
 						echo "
 						<li class='dropdown'>
-							<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Profile <b class='caret'></b></a>
+							<a href='#' class='dropdown-toggle' data-toggle='dropdown'> {$_SESSION['username']} <b class='caret'></b></a>
 							<ul class='dropdown-menu'>
-								<li><a href='sidebar-right.html'>Right Sidebar</a></li>
+								<li><a href='account/profile.php'>Account</a></li>
+								<li></li>
 								<li><a href='#'>Dummy Link1</a></li>
 								<li><a href='#'>Dummy Link2</a></li>
-								<li><a href='#'>Dummy Link3</a></li>
+								<li><a href='login_register/logout.php'>Log out</a></li>
 							</ul>
 						</li>
 
@@ -58,14 +60,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					}
 					else {
 						echo "
-							<li><a href='login.php' style='border:1px;border-style:solid; border-radius: 25px; border-color:#9a496b;'   >Login</a></li>
-							<li><a href='register.php'>Register</a></li>
+							<li><a href='login_register/login.php' style='border:1px;border-style:solid; border-radius: 25px; border-color:#9a496b;'   >Login</a></li>
+							<li><a href='login_register/register.php'>Register</a></li>
 							";
 					}
 					?>
 
 				</ul>
 			</div>
+
+
 			<!--/.nav-collapse -->
 		</div>
 	</div>

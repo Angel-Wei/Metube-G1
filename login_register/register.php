@@ -12,7 +12,7 @@ include "register_check.php";
 <body>
   <!--Layout Reference: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_signup_form_modal-->
   <div style="text-align:center;">
-		<img src="img/logo.png" class="center" alt="Logo of MeTube" style="width:345px;height:131px;">
+		<img src="../img/logo.png" class="center" alt="Logo of MeTube" style="width:345px;height:131px;">
   </div>
   <div style="text-align:left; width:40%; height:65%; border: 3px solid #fcbf1e; margin:0 auto;">
   <form method="post" class="modal-content" action="register.php" >

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once "function.php";
+include_once "../function.php";
 /*
 $link = mysql_connect("mysql1.cs.clemson.edu","metube_vm7e","alwo0825","metube_ndyk")
 or die("Could not connect:".mysql_error($link));
@@ -12,7 +12,8 @@ if(isset($_POST['submit'])){
   $psw = mysql_real_escape_string($_POST['psw']);
   $psw_repeat = mysql_real_escape_string($_POST['psw_repeat']);
   $email = mysql_real_escape_string($_POST['email']);
-  $sex = mysql_real_escape_string($_POST['sex']);
+  $sex = (isset($_POST['sex']) ? mysql_real_escape_string($_POST['sex']) : null);//added to avoid php error in case user doesn't specify sex
+
   $signin_error = array();
 
   // check if all the blanks are filled in
@@ -69,10 +70,10 @@ if(isset($_POST['submit'])){
   if ($username!="" and $psw!="" and $email!="" and $sex!=""){
     if (count($signin_error) == 0){
       insert_usr($username, $psw, $email, $sex);
-      $_SESSION['username']=$username; //Set the $_SESSION['username']
-      $_SESSION['id']=mysql_insert_id();; //Set the $_SESSION['username']
-      $_SESSION['success'] = "You are now logged in";
-      header('Location: index.php');
+      // $_SESSION['username']=$username; //Set the $_SESSION['username']
+      // $_SESSION['id']=mysql_insert_id();; //Set the $_SESSION['username']
+      // $_SESSION['success'] = "You are now logged in";
+      header('Location: login.php');
     }
   }
 }

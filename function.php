@@ -1,6 +1,40 @@
 <?php
 include "mysqlClass.inc.php";
 
+//used by profile.php
+function get_user_profile($username) {
+	$query = "select * from account where username='$username'";
+	$result = mysql_query( $query )
+	   or die ("get_user_profile() failed. Could not query the database: <br />". mysql_error());
+	$row = mysql_fetch_row($result);
+  return $row;
+	mysql_free_result($result);
+}
+
+
+function update_profile_check($username, $email) {
+	$query = "select * from account where email!='$email' && username='$username'";
+	$result = mysql_query( $query )
+		or die ("update_profile() failed. Could not query the database: <br />". mysql_error());
+	$count = mysql_num_rows($result);
+
+	if ($count != 0) {
+		echo '<script type="text/javascript">';
+		echo 'alert("'. $username.' already exists.Please create a new username.")';
+		echo '</script>';
+		return 1;
+	}
+	mysql_free_result($result);
+}
+
+function update_profile($username, $psw, $email, $sex) {
+		$query  = "UPDATE account
+							 SET username='$username',password='$psw',sex='$sex'
+							 WHERE email='$email'";
+		mysql_query($query);
+}
+
+
 // used by register_check.php
 function check_user_exist($username,$email){
 	$query1 = "select * from account where username='$username'";
