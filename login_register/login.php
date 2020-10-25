@@ -38,7 +38,7 @@ if(isset($_POST['submit'])) {
   <div style="text-align:center;">
 		<img src="../img/logo.png" class="center" alt="Logo of MeTube" style="width:345px;height:131px;">
   </div>
-  <div style="text-align:center; width:40%; height:50%; border: 3px solid #51adcf; margin:0 auto;">
+  <div style="text-align:center; width:35%; height:45%; border: 3px solid #51adcf; margin:0 auto;">
 		<form method="post" action="login.php" style="text-align:center">
     <h1 align="middle">Log In</h1>
     <h3 align="middle">Welcome back! Log in to access the MeTube.</h3><br>
@@ -48,10 +48,10 @@ if(isset($_POST['submit'])) {
 
     <label for="psw" align="middle"><b>Password </b></label>
 		<input type="password" name="password" placeholder="Enter Password"><br><br>
-
+		<!--
     <label align="middle">
     <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me</label><br>
-
+    -->
 		<input name="submit" class="signupbtn" type="submit" value="Login">
 		<input name="reset" class="resetbtn" type="reset" value="Reset">
 		</form>
