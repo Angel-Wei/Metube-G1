@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <title>Profile Page</title>
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/simple-sidebar.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
@@ -24,8 +24,6 @@ $password = $profile[1];
 $email = $profile[2];
 $Sex = $profile[3];
 ?>
-
-
 
 <body>
   <nav class="navbar navbar-default no-margin">
@@ -62,18 +60,17 @@ $Sex = $profile[3];
       <!-- Sidebar -->
       <div id="sidebar-wrapper">
 
-
-          <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-            <li  class="active">
-                <a href="profile.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Profile </a>
+        <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+            <li class="active">
+              <a href="profile.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Profile </a>
             </li>
-              <li>
-                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span> Channel</a>
-                     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                      <li><a href="#">link1</a></li>
-                      <li><a href="#">link2</a></li>
-                  </ul>
-              </li>
+            <li class="active">
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span> Channel</a>
+              <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                <li><a href="#">link1</a></li>
+                <li><a href="../media_upload.php">Upload New Media</a></li>
+              </ul>
+            </li>
               <li>
                   <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
               </li>

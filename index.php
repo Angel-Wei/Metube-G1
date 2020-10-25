@@ -11,7 +11,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Interior-Design-Responsive-Website-Templates-StyleInn">
 	<meta name="author" content="webThemez.com">
-	<title>Interior-Design-Responsive-Website-Templates-StyleInn</title>
+	<title>CPSC 6620 Metube Project G1 Homepage</title>
 	<link rel="favicon" href="assets/images/favicon.png">
 	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">

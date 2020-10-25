@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `account` (
   `username` varchar(50) NOT NULL,
   `password` varchar(128) NOT NULL,
   `email` varchar(60) DEFAULT NULL,
-  `type` varchar(4) NOT NULL DEFAULT '0',
+  `sex` varchar(30) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -37,8 +37,8 @@ CREATE TABLE IF NOT EXISTS `account` (
 -- Dumping data for table `account`
 --
 
-INSERT INTO `account` (`username`, `password`, `email`, `type`) VALUES
-('metube_g1', 'e9ch3sc', 'xiaohoz@clemson.edu', '1');
+INSERT INTO `account` (`username`, `password`, `email`, `sex`) VALUES
+('metubeg1', '123456', 'anqi@clemson.edu', 'Female');
 
 -- --------------------------------------------------------
 
@@ -73,22 +73,30 @@ INSERT INTO `download` (`downloadid`, `username`, `mediaid`, `downloadtime`) VAL
 
 CREATE TABLE IF NOT EXISTS `media` (
   `mediaid` int(11) NOT NULL AUTO_INCREMENT,
-  `filename` varchar(64) NOT NULL,
+  `username` varchar(64) NOT NULL,
+  `filename` varchar(64),
+  `title` varchar(64),
+  `description` varchar(240),
+  `keyword` varchar(64),
+  `category` varchar(64),
+  `privacy` varchar(64),
+  `permission` varchar(64),
   `filepath` varchar(256) NOT NULL,
+  `upload_IP` varchar(64),
+  `upload_data_time` varchar(64),
   `type` varchar(30) DEFAULT '0',
-  `lastaccesstime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`mediaid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 --
 -- Dumping data for table `media`
 --
 
-INSERT INTO `media` (`mediaid`, `filename`, `filepath`, `type`, `lastaccesstime`) VALUES
-(3, 'sample2.wmv', 'uploads/metube/', 'video/x-ms-wmv', '2010-01-28 10:58:45'),
-(4, 'sample3.wmv', 'uploads/metube/', 'video/x-ms-wmv', '2010-01-28 10:58:58'),
-(5, 'sample1.wmv', 'uploads/metube/', 'video/x-ms-wmv', '2010-01-28 10:59:11'),
-(9, 'nintendogs_wallcoo.com_6.jpg', 'uploads/metube/', 'image/jpeg', '2010-01-28 10:59:05');
+INSERT INTO `media` (`mediaid`, `username`, `filename`, `filepath`, `type`, `upload_data_time`) VALUES
+(NULL, 'metubeg1', 'sample2.wmv', 'uploads/metube/', 'video/x-ms-wmv', '2010-01-28 10:58:45'),
+(NULL, 'metubeg1', 'sample3.wmv', 'uploads/metube/', 'video/x-ms-wmv', '2010-01-28 10:58:58'),
+(NULL, 'metubeg1', 'sample1.wmv', 'uploads/metube/', 'video/x-ms-wmv', '2010-01-28 10:59:11'),
+(NULL, 'metubeg1', 'nintendogs_wallcoo.com_6.jpg', 'uploads/metube/', 'image/jpeg', '2010-01-28 10:59:05');
 
 -- --------------------------------------------------------
 
@@ -99,19 +107,21 @@ INSERT INTO `media` (`mediaid`, `filename`, `filepath`, `type`, `lastaccesstime`
 CREATE TABLE IF NOT EXISTS `upload` (
   `uploadid` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
+  `filename` varchar(64),
+  `filepath` varchar(256) NOT NULL,
   `mediaid` int(11) NOT NULL,
-  `uploadtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `upload_data_time` varchar(64),
   PRIMARY KEY (`uploadid`),
   KEY `username` (`username`),
   KEY `mediaid` (`mediaid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 --
 -- Dumping data for table `upload`
 --
 
-INSERT INTO `upload` (`uploadid`, `username`, `mediaid`, `uploadtime`) VALUES
-(3, 'metube', 3, '2008-09-05 15:52:19'),
-(4, 'metube', 4, '2008-09-05 15:53:10'),
-(5, 'metube', 5, '2008-09-05 15:53:47'),
-(9, 'metube', 9, '2008-09-05 16:28:36');
+INSERT INTO `upload` (`uploadid`, `username`, `filename`, `filepath`, `mediaid`, `upload_data_time`) VALUES
+(NULL, 'metubeg1', 'sample2.wmv', 'uploads/metube/', 1, '2010-01-28 10:58:45'),
+(NULL, 'metubeg1', 'sample3.wmv', 'uploads/metube/', 2, '2010-01-28 10:58:58'),
+(NULL, 'metubeg1', 'sample1.wmv', 'uploads/metube/', 3, '2010-01-28 10:59:11'),
+(NULL, 'metubeg1', 'nintendogs_wallcoo.com_6.jpg', 'uploads/metube/', 4, '2010-01-28 10:59:05');
