@@ -64,11 +64,13 @@ $Sex = $profile[3];
             <li class="active">
               <a href="profile.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Profile </a>
             </li>
-            <li class="active">
+            <li>
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span> Channel</a>
               <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                 <li><a href="#">link1</a></li>
-                <li><a href="../media_upload.php">Upload New Media</a></li>
+                <!-- <li><a href="../media_upload.php">Upload New Media</a></li> -->
+                <li><a href="../media/media_upload.php">Upload New Media</a></li>
+
               </ul>
             </li>
               <li>
