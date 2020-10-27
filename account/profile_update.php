@@ -64,7 +64,7 @@ include "profile_update_check.php";
                   <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span> Channel</a>
                      <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                       <li><a href="#">link1</a></li>
-                      <li><a href="#">link2</a></li>
+                      <li><a href="../media/media_upload.php">Upload New Media</a></li>
                   </ul>
               </li>
               <li>
