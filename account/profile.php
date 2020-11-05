@@ -20,9 +20,9 @@ include_once "../function.php";
 $user = $_SESSION['username'];
 $upper_user = strtoupper($user);
 $profile = get_user_profile($user);
-$password = $profile[1];
-$email = $profile[2];
-$Sex = $profile[3];
+$password = $profile[2];
+$email = $profile[3];
+$Sex = $profile[4];
 ?>
 
 <body>
@@ -67,41 +67,42 @@ $Sex = $profile[3];
             <li>
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span> Channel</a>
               <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                <li><a href="#">link1</a></li>
-                <!-- <li><a href="../media_upload.php">Upload New Media</a></li> -->
+                <!-- Button for showing all uploaded media -->
+                <li><a href="../media/media_under_channel.php">Your Media</a></li>
+                <!-- Button for upload new media -->
                 <li><a href="../media/media_upload.php">Upload New Media</a></li>
-
+                <!-- Button for Playlists -->
+                <li><a href="#">Playlists</a></li>
               </ul>
             </li>
-              <li>
-                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
-              </li>
-              <li>
-                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
-                  <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                      <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Family</a></li>
-                      <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Friend</a></li>
-
-                  </ul>
-              </li>
-              <li>
-                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Overview</a>
-              </li>
-              <li>
-                  <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Events</a>
-              </li>
-              <li>
-                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-youtube-play fa-stack-1x "></i></span>About</a>
-              </li>
-              <li>
-                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
-              </li>
-              <li>
-                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>Contact</a>
-              </li>
-              <li>
-                  <a href="../login_register/logout.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Logout</a>
-              </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
+              <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Family</a></li>
+                <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Friend</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Downloaded Media</a>
+            </li>
+            <li>
+              <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Events</a>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-youtube-play fa-stack-1x "></i></span>About</a>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>Contact</a>
+            </li>
+            <li>
+              <a href="../login_register/logout.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Logout</a>
+            </li>
           </ul>
       </div><!-- /#sidebar-wrapper -->
       <!-- Page Content -->
@@ -110,8 +111,8 @@ $Sex = $profile[3];
               <div class="row">
                   <div class="col-lg-12">
                       <h1>User Profile</h1><br>
-                      <a> <img src="../uploads/metube/nintendogs_wallcoo.com_6.jpg" style="margin:-15px 10px 40px 0px"  width="190" alt="MeTube"></a>
-                      <a href="profile_update.php" style="padding-left:60px;font-size:30px;text-decoration:underline;color:green" > Edit</a>
+                      <a> <img src="../img/profile_user_icon.png" style="margin:-15px 10px 40px 0px"  width="190" alt="MeTube"></a>
+                      <a href="profile_update.php" style="padding-left:40px;font-size:30px;text-decoration:underline;color:green" > Edit</a>
                       <br>
 
                       <table cellspacing="0" cellpadding="0">
