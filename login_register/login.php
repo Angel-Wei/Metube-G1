@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="css/default.css" />
+<link rel="stylesheet" type="text/css" href="css/default.css"/>
 <?php
 session_start();
 
@@ -36,7 +36,8 @@ if(isset($_POST['submit'])) {
 <head>
 <body>
   <div style="text-align:center;">
-		<img src="../img/logo.png" class="center" alt="Logo of MeTube" style="width:345px;height:131px;">
+		<a href="../index.php">
+		<img src="../img/logo.png" class="center" alt="Logo of MeTube" style="width:345px;height:131px;"></a>
   </div>
   <div style="text-align:center; width:35%; height:45%; border: 3px solid #51adcf; margin:0 auto;">
 		<form method="post" action="login.php" style="text-align:center">

@@ -24,6 +24,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script src="assets/js/html5shiv.js"></script>
 	<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
+	<style>
+	div.gallery {
+	  margin: 5px;
+	  border: 2px solid #ccc;
+	  float: left;
+	  width: 400px;
+	}
+
+	div.gallery:hover {
+	  border: 5px solid #8bcdcd;
+	}
+
+	div.gallery img {
+	  width: 100%;
+	  height: auto;
+	}
+	</style>
 </head>
 <body>
 	<!-- Fixed navbar -->
@@ -49,12 +66,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<a href='#' class='dropdown-toggle' data-toggle='dropdown'> {$_SESSION['username']} <b class='caret'></b></a>
 							<ul class='dropdown-menu'>
 								<li><a href='account/profile.php'>Account</a></li>
-								<li></li>
 								<li><a href='#'>Dummy Link1</a></li>
 								<li><a href='#'>Dummy Link2</a></li>
 								<li><a href='login_register/logout.php'>Log out</a></li>
 							</ul>
 						</li>
+						<li><a href='browse.php'>Browse all</a></li>
 
 						";
 					}
@@ -62,6 +79,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						echo "
 							<li><a href='login_register/login.php' style='border:1px;border-style:solid; border-radius: 25px; border-color:#9a496b;'   >Login</a></li>
 							<li><a href='login_register/register.php'>Register</a></li>
+							<li><a href='browse.php'>Browse all</a></li>
 							";
 					}
 					?>
@@ -80,251 +98,178 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="container">
 					<div class="fluid_container">
                     <div class="camera_wrap camera_emboss pattern_1" id="camera_wrap_4">
-                        <div data-thumb="assets/images/slides/thumbs/img1.jpg" data-src="assets/images/slides/img1.jpg">
-                        </div>
-                        <div data-thumb="assets/images/slides/thumbs/img2.jpg" data-src="assets/images/slides/img2.jpg">
-                        </div>
-                        <div data-thumb="assets/images/slides/thumbs/img3.jpg" data-src="assets/images/slides/img3.jpg">
-                        </div>
+                        <div data-src="img/Lion king.jpg"></div>
+                        <div data-src="img/Thor.jpg"></div>
+                        <div data-src="img/Pikachu.jpg"></div>
+												<div data-src="img/Batman.jpg"></div>
+												<div data-src="img/Captain America.jpg"></div>
                     </div><!-- #camera_wrap_3 -->
                 </div><!-- .fluid_container -->
 		</div>
 	</header>
 	<!-- /Header -->
-
-
       <section class="news-box top-margin">
         <div class="container">
-            <h2><span>We Offer..</span></h2>
-            <div class="row">
+            <h2><span>Wellcome to the Metube!</span></h2>
+						<h4><span>(Hover the cursor to preview or click to view the media in details)</span></h4><hr>
+						<!--Video display 1-->
+						<div class="col-lg-4 col-md-4 col-sm-12">
+						<div class="galley">
+							<a href='media/media_view.php?id=8' target='_blank'>
+							<video width="350px" oncanplay="this.muted=true" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=this.currentTime;">
+								<source src="uploads/clemson/tangled-lostchameleon_h480p.mov">Your browser does not support the <code>video</code>tag.</video></div></a>
+									<div class="box">
+											<p class="title"><strong>Tangled-trailer: Lost Chameleon</strong></p>
+											<p style="padding: 10px;text-align:'left';">A trailer about the lovely chameleon in the Disney movie "Tangled".</p>
+									</div>
+						</div>
 
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                    <div class="newsBox">
-                        <div class="thumbnail">
-                            <figure><img src="assets/images/news2.jpg" alt=""></figure>
-                            <div class="caption maxheight2">
-                            <div class="box_inner">
-                                        <div class="box">
-                                            <p class="title"><strong>CONCEPT</strong></p>
-                                            <p>Lorem ipsum dolor sit amet, conc tetu er adipi scing. Praesent ves tibuum molestie lacuiirhs. Aenean.</p>
-                                        </div>
-                                        <div>
-                                            <a href="#" class="btn-inline">more</a>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                    <div class="newsBox">
-                        <div class="thumbnail">
-                            <figure><img src="assets/images/news3.jpg" alt=""></figure>
-                            <div class="caption maxheight2">
-                            <div class="box_inner">
-                                        <div class="box">
-                                            <p class="title"><strong>DESIGN</strong></p>
-                                            <p>Lorem ipsum dolor sit amet, conc tetu er adipi scing. Praesent ves tibuum molestie lacuiirhs. Aenean.</p>
-                                        </div>
-                                        <div>
-                                            <a href="#" class="btn-inline">more</a>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                    <div class="newsBox">
-                        <div class="thumbnail">
-                            <figure><img src="assets/images/news4.jpg" alt=""></figure>
-                            <div class="caption maxheight2">
-                           <div class="box_inner">
-                                        <div class="box">
-                                            <p class="title"><strong>INSTALLATION</strong></p>
-                                            <p>Lorem ipsum dolor sit amet, conc tetu er adipi scing. Praesent ves tibuum molestie lacuiirhs. Aenean.</p>
-                                        </div>
-                                        <div>
-                                            <a href="#" class="btn-inline">more</a>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+						<!--Video display 2-->
+						<div class="col-lg-4 col-md-4 col-sm-12">
+						<div class="galley">
+							<a href='media/media_view.php?id=33' target='_blank'>
+							<video width="350px" oncanplay="this.muted=true" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=this.currentTime;">
+								<source src="uploads/anqi/the-addams-family-2-announcement-piece_h480p.mov">Your browser does not support the <code>video</code>tag.</video></div></a>
+									<div class="box">
+										<p class="title"><strong>"The Adams family 2"-trailer</strong></p>
+										<p style="padding: 10px;text-align:'left';">The Addams Family 2 has been officially announced to arrive just in time for Halloween in 2021.</p>
+									</div>
+					  </div>
 
+						<!--Video display 3-->
+						<div class="col-lg-4 col-md-4 col-sm-12">
+						<div class="galley">
+							<a href='media/media_view.php?id=37' target='_blank'>
+							<video width="350px" oncanplay="this.muted=true" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=this.currentTime;">
+								<source src="uploads/anqi/Adele-Someone+like+you.mp4">Your browser does not support the <code>video</code>tag.</video></div></a>
+									<div class="box">
+										<p class="title"><strong>Adele-Someone like you</strong></p>
+										<p style="padding: 10px;text-align:'left';">
+											"Someone like You" is a song recorded by English singer-songwriter Adele.
+											It was written by Adele and Dan Wilson for her second studio album, 21.</p>
+									</div>
+					  </div>
 
-      <section class="container">
-      <div class="row">
-      	<div class="col-md-4"><div class="title-box clearfix "><h2 class="title-box_primary">About Us</h2></div>
-        <p><span>Perspiciatis unde omnis iste natus error sit voluptatem. Cum sociis natoque penatibus et magnis dis parturient montes ascetur ridiculus musull dui.</span></p>
-        <p>Lorem ipsumulum aenean noummy endrerit mauris. Cum sociis natoque penatibus et magnis dis parturient montes ascetur ridiculus mus. Null dui. Fusce feugiat malesuada odio.</p>
-        <a href="#" title="read more" class="btn-inline " target="_self">read more</a> </div>
+						<!--Video display 4-->
+						<div class="col-lg-4 col-md-4 col-sm-12">
+						<div class="galley">
+							<a href='media/media_view.php?id=38' target='_blank'>
+							<video width="350px" oncanplay="this.muted=true" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=this.currentTime;">
+								<source src="uploads/anqi/Sam+Smith.mp4">Your browser does not support the <code>video</code>tag.</video></div></a>
+									<div class="box">
+										<p class="title"><strong>Sam Smith-I'm not the only one</strong></p>
+										<p style="padding: 10px;text-align:'left';">
+											"I'm Not the Only One" is a song recorded by English singer Sam Smith from their debut studio album, In the Lonely Hour (2014).</p>
+									</div>
+					  </div>
 
+						<!--Video display 5-->
+						<div class="col-lg-4 col-md-4 col-sm-12">
+						<div class="galley">
+							<a href='media/media_view.php?id=41' target='_blank'>
+							<video width="350px" oncanplay="this.muted=true" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=this.currentTime;">
+								<source src="uploads/administrator/mulan-trailer-1_h480p.mov">Your browser does not support the <code>video</code>tag.</video></div></a>
+									<div class="box">
+										<p class="title"><strong>Mulan-trailer</strong></p>
+										<p style="padding: 10px;text-align:'left';">
+											Mulan is a 2020 American action drama film produced by Walt Disney Pictures.
+											It is a live-action adaptation of Disney's 1998 animated film of the same name,
+											based on the Chinese folklore "The Ballad of Mulan".</p>
+									</div>
+					  </div>
 
-         <div class="col-md-4"><div class="title-box clearfix "><h2 class="title-box_primary">Clients</h2></div>
-            <blockquote class="blockquote-1">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid</p>
-					<small>Someone famous in <cite title="Source Title">Source Title</cite></small>
-				</blockquote></div>
-
-          <div class="col-md-4"><div class="title-box clearfix "><h2 class="title-box_primary">Projects</h2></div>
-            <div class="list styled custom-list">
-            <ul>
-            <li><a title="Snatoque penatibus et magnis dis partu rient montes ascetur ridiculus mus." href="#">Singapore Township Complete Interior Design</a></li>
-            <li><a title="Fusce feugiat malesuada odio. Morbi nunc odio gravida at cursus nec luctus." href="#">Mega luxury Villas Planing and Interior Design</a></li>
-            <li><a title="Penatibus et magnis dis parturient montes ascetur ridiculus mus." href="#">Commercial Shopping Mall Interior Design</a></li>
-            <li><a title="Morbi nunc odio gravida at cursus nec luctus a lorem. Maecenas tristique orci." href="#">SVN Independent & Duplex Houses</a></li>
-            <li><a title="Snatoque penatibus et magnis dis partu rient montes ascetur ridiculus mus." href="#">World wide IT park</a></li>
-            <li><a title="Fusce feugiat malesuada odio. Morbi nunc odio gravida at cursus nec luctus." href="#">North Arena SNT Township Interior Design</a></li>
-            </ul>
-            </div>
-         </div>
-      </div>
-      </section>
+						<!--Video display 6-->
+						<div class="col-lg-4 col-md-4 col-sm-12">
+						<div class="galley">
+							<a href='media/media_view.php?id=42' target='_blank'>
+							<video width="350px" oncanplay="this.muted=true" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=this.currentTime;">
+								<source src="uploads/administrator/Avril-Skater+boy.mp4">Your browser does not support the <code>video</code>tag.</video></div></a>
+									<div class="box">
+										<p class="title"><strong>Avril - Sk8er Boi</strong></p>
+										<p style="padding: 10px;text-align:'left';">
+											"Sk8er Boi" (pronounced "skater boy") is a song by Canadian singer-songwriter Avril Lavigne,
+											released as the second single from her debut album, Let Go (2002).</p>
+									</div>
+					  </div>
+					</section><hr>
 
     <section class="container">
-<div class="row">
-<div class="col-md-12">
- <h2><span>Our Projects</span></h2>
-    <div class="carousel slide" id="myCarousel">
-        <div class="carousel-inner">
-            <div class="item active">
-                    <ul class="thumbnails">
-                        <li class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="#"><img src="assets/images/portfolio/img1.jpg" alt=""></a>
-                            </div>
-                            <div class="caption">
-                                <h4>Praesent commodo</h4>
-                				<p>Nullam Condimentum Nibh Etiam Sem</p>
-                                <a class="btn btn-mini" href="#">Read More</a>
-                            </div>
-                        </li>
-                        <li class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="#"><img src="assets/images/portfolio/img2.jpg" alt=""></a>
-                            </div>
-                            <div class="caption">
-                                <h4>Praesent commodo</h4>
-                				<p>Nullam Condimentum Nibh Etiam Sem</p>
-                                <a class="btn btn-mini" href="#">Read More</a>
-                            </div>
-                        </li>
-                        <li class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="#"><img src="assets/images/portfolio/img3.jpg" alt=""></a>
-                            </div>
-                            <div class="caption">
-                                <h4>Praesent commodo</h4>
-                				<p>Nullam Condimentum Nibh Etiam Sem</p>
-                                <a class="btn btn-mini" href="#">Read More</a>
-                            </div>
-                        </li>
-                        <li class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="#"><img src="assets/images/portfolio/img4.jpg" alt=""></a>
-                            </div>
-                            <div class="caption">
-                                <h4>Praesent commodo</h4>
-                				<p>Nullam Condimentum Nibh Etiam Sem</p>
-                                <a class="btn btn-mini" href="#">Read More</a>
-                            </div>
-                        </li>
-                    </ul>
-              </div><!-- /Slide1 -->
-            <div class="item">
-                    <ul class="thumbnails">
-                        <li class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="#"><img src="assets/images/portfolio/img5.jpg" alt=""></a>
-                            </div>
-                            <div class="caption">
-                                <h4>Praesent commodo</h4>
-                				<p>Nullam Condimentum Nibh Etiam Sem</p>
-                                <a class="btn btn-mini" href="#">Read More</a>
-                            </div>
-                        </li>
-                        <li class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="#"><img src="assets/images/portfolio/img6.jpg" alt=""></a>
-                            </div>
-                            <div class="caption">
-                                <h4>Praesent commodo</h4>
-                				<p>Nullam Condimentum Nibh Etiam Sem</p>
-                                <a class="btn btn-mini" href="#">Read More</a>
-                            </div>
-                        </li>
-                        <li class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="#"><img src="assets/images/portfolio/img7.jpg" alt=""></a>
-                            </div>
-                            <div class="caption">
-                                <h4>Praesent commodo</h4>
-                				<p>Nullam Condimentum Nibh Etiam Sem</p>
-                                <a class="btn btn-mini" href="#">Read More</a>
-                            </div>
-                        </li>
-                        <li class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="#"><img src="assets/images/portfolio/img8.jpg" alt=""></a>
-                            </div>
-                            <div class="caption">
-                                <h4>Praesent commodo</h4>
-                				<p>Nullam Condimentum Nibh Etiam Sem</p>
-                                <a class="btn btn-mini" href="#">Read More</a>
-                            </div>
-                        </li>
-                    </ul>
-              </div><!-- /Slide2 -->
-            <div class="item">
-                    <ul class="thumbnails">
-                        <li class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="#"><img src="assets/images/portfolio/img1.jpg" alt=""></a>
-                            </div>
-                            <div class="caption">
-                                <h4>Praesent commodo</h4>
-                				<p>Nullam Condimentum Nibh Etiam Sem</p>
-                                <a class="btn btn-mini" href="#">Read More</a>
-                            </div>
-                        </li>
-                        <li class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="#"><img src="assets/images/portfolio/img2.jpg" alt=""></a>
-                            </div>
-                            <div class="caption">
-                                <h4>Praesent commodo</h4>
-                				<p>Nullam Condimentum Nibh Etiam Sem</p>
-                                <a class="btn btn-mini" href="#">Read More</a>
-                            </div>
-                        </li>
-                        <li class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="#"><img src="assets/images/portfolio/img3.jpg" alt=""></a>
-                            </div>
-                            <div class="caption">
-                                <h4>Praesent commodo</h4>
-                				<p>Nullam Condimentum Nibh Etiam Sem</p>
-                                <a class="btn btn-mini" href="#">Read More</a>
-                            </div>
-                        </li>
-                        <li class="col-md-3">
-                            <div class="thumbnail">
-                                <a href="#"><img src="assets/images/portfolio/img4.jpg" alt=""></a>
-                            </div>
-                            <div class="caption">
-                                <h4>Praesent commodo</h4>
-                				<p>Nullam Condimentum Nibh Etiam Sem</p>
-                                <a class="btn btn-mini" href="#">Read More</a>
-                            </div>
-                        </li>
-                    </ul>
-              </div><!-- /Slide3 -->
-        </div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3><span>Image Collection</span></h3>
+					<div class="carousel slide" id="myCarousel">
+						<div class="carousel-inner">
+							<div class="item active">
+											<ul class="thumbnails">
+												<li class="col-md-3">
+													<div class="thumbnail">
+														<img src="uploads/anqi/chihiro020.jpg" alt=""></div>
+													<div class="caption">
+														<h4>Faceless man</h4>
+														<a class="btn btn-mini" href="media/media_view.php?id=5">Read More</a></div>
+												</li>
+
+												<li class="col-md-3">
+													<div class="thumbnail">
+														<img src="uploads/anqi/chihiro032.jpg" alt=""></div>
+													<div class="caption">
+														<h4>Haku</h4>
+														<a class="btn btn-mini" href="media/media_view.php?id=6">Read More</a></div>
+												</li>
+
+												<li class="col-md-3">
+													<div class="thumbnail">
+														<img src="uploads/yuan/ponyo009.jpg" alt=""></div>
+													<div class="caption">
+														<h4>Ponyo</h4>
+														<a class="btn btn-mini" href="media/media_view.php?id=43">Read More</a></div>
+												</li>
+
+												<li class="col-md-3">
+													<div class="thumbnail">
+														<img src="uploads/yuan/chihiro044.jpg" alt=""></div>
+													<div class="caption">
+														<h4>Spirited Away</h4>
+														<a class="btn btn-mini" href="media/media_view.php?id=44">Read More</a></div>
+												</li>
+											</ul>
+								</div><!-- /Slide1 -->
+							<div class="item">
+											<ul class="thumbnails">
+												<li class="col-md-3">
+													<div class="thumbnail">
+														<img src="uploads/yuan/DSC01598.JPG" alt=""></div>
+													<div class="caption">
+														<h4>Clemson University</h4>
+														<a class="btn btn-mini" href="media/media_view.php?id=30">Read More</a></div>
+												</li>
+
+												<li class="col-md-3">
+													<div class="thumbnail">
+														<img src="uploads/clemson/DSC03635.JPG" alt=""></div>
+				                  <div class="caption">
+														<h4>Puerto Rico</h4>
+														<a class="btn btn-mini" href="media/media_view.php?id=23">Read More</a></div>
+				                </li>
+
+												<li class="col-md-3">
+													<div class="thumbnail">
+														<img src="uploads/administrator/DSC02645.JPG" alt=""></div>
+				                  <div class="caption">
+														<h4>Sunset view from a street in Charleston</h4>
+														<a class="btn btn-mini" href="media/media_view.php?id=27">Read More</a></div>
+				                </li>
+
+												<li class="col-md-3">
+													<div class="thumbnail">
+														<img src="uploads/clemson/DSC05686.JPG" alt=""></div>
+				                  <div class="caption">
+														<h4>Foilage view at North Carolina</h4>
+														<a class="btn btn-mini" href="media/media_view.php?id=11">Read More</a></div>
+				                </li>
+											</ul>
+								</div><!-- /Slide2 -->
+					</div>
 
         <div class="control-box">
             <a data-slide="prev" href="#myCarousel" class="carousel-control left">‹</a>
@@ -340,6 +285,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <footer id="footer">
 		<div class="container">
 			<div class="social text-center">
+				<h4><b>CPSC 6620 - G1</h4>
+				<h5>Group Member: Anqi Wei, Xiaohong Zhang</h5>
 				<a href="#"><i class="fa fa-twitter"></i></a>
 				<a href="#"><i class="fa fa-facebook"></i></a>
 				<a href="#"><i class="fa fa-dribbble"></i></a>
