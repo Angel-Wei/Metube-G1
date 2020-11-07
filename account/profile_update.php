@@ -28,7 +28,7 @@ include "profile_update_check.php";
                   <?php
                   echo "
                     <button type='button' class='navbar-toggle collapsed' data-toggle='collapse'  id='menu-toggle'>
-                      $upper_user
+                      <span class='glyphicon glyphicon-th-large' aria-hidden='true'></span>$upper_user
                     </button>
                   "
                   ?>
@@ -43,7 +43,7 @@ include "profile_update_check.php";
                             <?php
                             echo "
                               <li class='active' ><button class='navbar-toggle collapse in' data-toggle='collapse' id='menu-toggle-2'>
-                                $upper_user</button>
+                                <span class='glyphicon glyphicon-th-large' aria-hidden='true'></span>$upper_user</button>
                               </li>
                             "
                             ?>

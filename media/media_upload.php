@@ -12,12 +12,11 @@ if(!$_SESSION["username"]){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>MeTube: Media Upload</title>
+    <title>MeTube-Channel: Media Upload</title>
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/simple-sidebar.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/default.css" />
 
 </head>
 <?php
@@ -71,10 +70,12 @@ $Sex = $profile[4];
             <li class="active">
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span> Channel</a>
               <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                <li><a href="#">link1</a></li>
-                <li  class="active"><a href="media_upload.php">Upload New Media</a></li>
+                <li><a href="media_under_channel.php">Your Media</a></li>
+                <li class="active"><a href="media_upload.php">Upload New Media</a></li>
+                <li><a href="#">Playlists</a></li>
               </ul>
             </li>
+<<<<<<< HEAD
               <li>
                   <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
               </li>
@@ -99,6 +100,36 @@ $Sex = $profile[4];
               <li>
                   <a href="../login_register/logout.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Logout</a>
               </li>
+=======
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
+              <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Family</a></li>
+                <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Friend</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Downloaded Media</a>
+            </li>
+            <li>
+              <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Events</a>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-youtube-play fa-stack-1x "></i></span>About</a>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>Contact</a>
+            </li>
+            <li>
+              <a href="../login_register/logout.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Logout</a>
+            </li>
+>>>>>>> 2160e94c282f068b880c52e4069cfa73ae8f2fd6
           </ul>
       </div><!-- /#sidebar-wrapper -->
       <!-- Page Content -->
@@ -108,7 +139,7 @@ $Sex = $profile[4];
                   <div class="col-lg-12">
                     <form method="post" action="media_upload_process.php" enctype="multipart/form-data">
                       <h2>Upload Media</h2>
-                      <label for="file"><b>Please select a file to upload. </b></label><br>
+                      <label for="file"><b>Please select a file to upload (should not include special characters).</b></label><br>
                       <input type="file" name="file"><br>
 
                       <label><b>Please provide supplementary information of the file.</b></label><br>
@@ -142,7 +173,6 @@ $Sex = $profile[4];
                           <option value="Video: movie">movie</option>
                           <option value="Video: other">other</option>
                         </optgroup>
-                        <option value="Other" selected>Other</option>
                       </select><br>
 
                       <!--Create a drop down list to list options for privacy-->

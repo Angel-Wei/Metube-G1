@@ -87,6 +87,8 @@ CREATE TABLE IF NOT EXISTS `media` (
   `upload_IP` varchar(64),
   `upload_data_time` varchar(64),
   `type` varchar(30) DEFAULT '0',
+  `lastaccesstime` varchar(64),
+  `viewcount` int(11) DEFAULT '0',
   PRIMARY KEY (`mediaid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
@@ -128,7 +130,6 @@ INSERT INTO `upload` (`uploadid`, `username`, `filename`, `filepath`, `mediaid`,
 (NULL, 'metubeg1', 'sample1.wmv', 'uploads/metube/', 3, '2010-01-28 10:59:11'),
 (NULL, 'metubeg1', 'nintendogs_wallcoo.com_6.jpg', 'uploads/metube/', 4, '2010-01-28 10:59:05');
 
-
 --
 -- Contact: relationship among accounts, many to many. type {1:family;2:friend;0:not contact (default)}
 -- block {0:no block (default); 1: block}
@@ -141,3 +142,17 @@ CREATE TABLE IF NOT EXISTS `contact` (
   `block` int(2) NOT NULL DEFAULT 0,
   PRIMARY KEY (`contactid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+-- Table structure for table `comment`
+--
+CREATE TABLE IF NOT EXISTS `comment` (
+  `commentid` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50),
+  `mediaid` int(11) NOT NULL,
+  `comment` varchar(240),
+  `submission_time` varchar(64),
+  `score` int(11) NOT NULL,
+  PRIMARY KEY (`commentid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+>>>>>>> 2160e94c282f068b880c52e4069cfa73ae8f2fd6
