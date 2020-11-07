@@ -26,11 +26,13 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 CREATE TABLE IF NOT EXISTS `account` (
+  `accountid` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `password` varchar(128) NOT NULL,
   `email` varchar(60) DEFAULT NULL,
   `sex` varchar(30) NOT NULL,
-  PRIMARY KEY (`username`)
+  PRIMARY KEY (`accountid`),
+  KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -125,3 +127,17 @@ INSERT INTO `upload` (`uploadid`, `username`, `filename`, `filepath`, `mediaid`,
 (NULL, 'metubeg1', 'sample3.wmv', 'uploads/metube/', 2, '2010-01-28 10:58:58'),
 (NULL, 'metubeg1', 'sample1.wmv', 'uploads/metube/', 3, '2010-01-28 10:59:11'),
 (NULL, 'metubeg1', 'nintendogs_wallcoo.com_6.jpg', 'uploads/metube/', 4, '2010-01-28 10:59:05');
+
+
+--
+-- Contact: relationship among accounts, many to many. type {1:family;2:friend;0:not contact (default)}
+-- block {0:no block (default); 1: block}
+--
+CREATE TABLE IF NOT EXISTS `contact` (
+  `contactid` int(11) NOT NULL AUTO_INCREMENT,
+  `accountid1` int(11) NOT NULL,
+  `accountid2` int(11) NOT NULL,
+  `type` int(2) NOT NULL DEFAULT 0,
+  `block` int(2) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`contactid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -1,13 +1,15 @@
 <?php
-session_start();
 include_once "../function.php";
-
+// if(!$_SESSION["username"]){
+//   echo "<meta http-equiv=\"refresh\" content=\"0;url=../login_register/login.php\">";
+// }
+session_start();
 $user = $_SESSION['username'];
 $upper_user = strtoupper($user);
 $profile = get_user_profile($user);
-$password = $profile[1];
-$email = $profile[2];
-$sex = $profile[3];
+$password = $profile[2];
+$email = $profile[3];
+$sex = $profile[4];
 
 
 
@@ -63,3 +65,5 @@ if(isset($_POST['submit'])){
       header('Location: profile.php');
   }
 }
+
+?>

@@ -36,9 +36,9 @@ if(isset($_POST['submit'])) {
 <head>
 <body>
   <div style="text-align:center;">
-		<img src="../img/logo.png" class="center" alt="Logo of MeTube" style="width:345px;height:131px;">
+		<a href="../index.php"><img src="../img/logo.png" class="center" alt="Logo of MeTube" style="width:345px;height:131px;"></a>
   </div>
-  <div style="text-align:center; width:35%; height:45%; border: 3px solid #51adcf; margin:0 auto;">
+  <div style="text-align:center; width:35%; height:60%; border: 3px solid #51adcf; margin:0 auto;">
 		<form method="post" action="login.php" style="text-align:center">
     <h1 align="middle">Log In</h1>
     <h3 align="middle">Welcome back! Log in to access the MeTube.</h3><br>
@@ -53,7 +53,9 @@ if(isset($_POST['submit'])) {
     <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me</label><br>
     -->
 		<input name="submit" class="signupbtn" type="submit" value="Login">
-		<input name="reset" class="resetbtn" type="reset" value="Reset">
+		<input name="reset" class="resetbtn" type="reset" value="Reset"><br><br>
+		<button onclick="location.href='register.php'" type="button" style="padding: 10px; text-align: center;  cursor: pointer;" >
+         Not a member yet? Sign Up!</button>
 		</form>
   </div>
 </body>

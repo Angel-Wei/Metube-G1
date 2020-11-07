@@ -1,3 +1,18 @@
+<?php
+include_once "../function.php";
+// if(!isset($_SESSION["username"])){
+//   echo "<meta http-equiv=\"refresh\" content=\"0;url=../login_register/login.php\">";
+// }
+session_start();
+$user = $_SESSION['username'];
+$upper_user = strtoupper($user);
+$profile = get_user_profile($user);
+$password = $profile[2];
+$email = $profile[3];
+$Sex = $profile[4];
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,16 +29,7 @@
     <style>table,th,td {border: none;} td,th{height:30px;width:150px;font-size: 16px; }</style>
 
 </head>
-<?php
-session_start();
-include_once "../function.php";
-$user = $_SESSION['username'];
-$upper_user = strtoupper($user);
-$profile = get_user_profile($user);
-$password = $profile[1];
-$email = $profile[2];
-$Sex = $profile[3];
-?>
+
 
 <body>
   <nav class="navbar navbar-default no-margin">
@@ -33,8 +39,8 @@ $Sex = $profile[3];
                 <!-- show username on toggle button -->
                   <?php
                   echo "
-                    <button type='button' class='navbar-toggle collapsed' data-toggle='collapse'  id='menu-toggle'>
-                      <span class='glyphicon glyphicon-th-large' aria-hidden='true'></span>$upper_user
+                    <button type='button' class='navbar-toggle collapsed' data-toggle='collapse'  id='menu-toggle' style='background-color:#4CAF50'>
+                      $upper_user
                     </button>
                   "
                   ?>
@@ -49,7 +55,7 @@ $Sex = $profile[3];
                             <?php
                             echo "
                               <li class='active' ><button class='navbar-toggle collapse in' data-toggle='collapse' id='menu-toggle-2'>
-                                <span class='glyphicon glyphicon-th-large' aria-hidden='true'></span>$upper_user</button>
+                                $upper_user</button>
                               </li>
                             "
                             ?>
@@ -77,12 +83,7 @@ $Sex = $profile[3];
                   <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
               </li>
               <li>
-                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
-                  <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                      <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Family</a></li>
-                      <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Friend</a></li>
-
-                  </ul>
+                  <a href="../contact/contact.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
               </li>
               <li>
                   <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Overview</a>
