@@ -131,25 +131,25 @@ INSERT INTO `upload` (`uploadid`, `username`, `filename`, `filepath`, `mediaid`,
 -- Table structure for table `media`
 --
 
-CREATE TABLE IF NOT EXISTS `contact` (
-  `username` varchar(64) NOT NULL,
-  `abcd` boolean DEFAULT '0',
-  `anqi` boolean DEFAULT '0',
-  `clemson` boolean DEFAULT '0',
-  `elcos` boolean DEFAULT '0',
-  `g2ec` boolean DEFAULT '0',
-  `metubeg1` boolean DEFAULT '0',
-  `sand` boolean DEFAULT '0',
-  `xiaohoz` boolean DEFAULT '0',
-  `alice` boolean DEFAULT '0',
-  `kiki` boolean DEFAULT '0',
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+-- CREATE TABLE IF NOT EXISTS `contact` (
+--   `username` varchar(64) NOT NULL,
+--   `abcd` boolean DEFAULT '0',
+--   `anqi` boolean DEFAULT '0',
+--   `clemson` boolean DEFAULT '0',
+--   `elcos` boolean DEFAULT '0',
+--   `g2ec` boolean DEFAULT '0',
+--   `metubeg1` boolean DEFAULT '0',
+--   `sand` boolean DEFAULT '0',
+--   `xiaohoz` boolean DEFAULT '0',
+--   `alice` boolean DEFAULT '0',
+--   `kiki` boolean DEFAULT '0',
+--   PRIMARY KEY (`username`)
+-- ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
--- Insert row value into column 'username'
-insert into contact (username) values ('abcd');
--- Insert new column of user
-ALTER TABLE table_name ADD column_name boolean;
+-- -- Insert row value into column 'username'
+-- insert into contact (username) values ('abcd');
+-- -- Insert new column of user
+-- ALTER TABLE table_name ADD column_name boolean;
 
 -- Table structure for table `comment`
 --
