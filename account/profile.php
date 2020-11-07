@@ -1,6 +1,5 @@
 <?php
 include_once "../function.php";
-
 session_start();
 $user = $_SESSION['username'];
 $upper_user = strtoupper($user);
@@ -9,8 +8,6 @@ $password = $profile[2];
 $email = $profile[3];
 $Sex = $profile[4];
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,14 +123,14 @@ $Sex = $profile[4];
                           <td style='font-weight: bold'>Sex</td>
                           <td>$Sex</td>
                         </tr>
-                        <tr>
-                          <td style='font-weight: bold'>Email</td>
-                          <td>$email</td>
-                        </tr>
+                        <tr>
+                          <td style='font-weight: bold'>Email</td>
+                          <td>$email</td>
+                        </tr>
                       <tr>
-                          <td style='font-weight: bold'>Password</td>
-                          <td>*</td>
-                        </tr>
+                          <td style='font-weight: bold'>Password</td>
+                          <td>*</td>
+                        </tr>
                       "
                       ?>
                       </table>

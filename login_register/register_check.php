@@ -66,17 +66,11 @@ if(isset($_POST['submit'])){
     echo "</ul>";
   }
 
-  // insert the values into table account & contact if all the requirements are met
+  // insert the values into table account if all the requirements are met
   if ($username!="" and $psw!="" and $email!="" and $sex!=""){
     if (count($signin_error) == 0){
       insert_usr($username, $psw, $email, $sex);
-<<<<<<< HEAD
-=======
       insert_contact_instance($username);
-      // $_SESSION['username']=$username; //Set the $_SESSION['username']
-      // $_SESSION['id']=mysql_insert_id();; //Set the $_SESSION['username']
-      // $_SESSION['success'] = "You are now logged in";
->>>>>>> 2160e94c282f068b880c52e4069cfa73ae8f2fd6
       header('Location: login.php');
     }
   }
