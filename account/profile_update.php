@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <?php
-include_once "../function.php";
 include "profile_update_check.php";
 ?>
 <html lang="en">
@@ -29,7 +28,7 @@ include "profile_update_check.php";
                   <?php
                   echo "
                     <button type='button' class='navbar-toggle collapsed' data-toggle='collapse'  id='menu-toggle'>
-                      <span class='glyphicon glyphicon-th-large' aria-hidden='true'></span>$upper_user
+                      $upper_user
                     </button>
                   "
                   ?>
@@ -44,7 +43,7 @@ include "profile_update_check.php";
                             <?php
                             echo "
                               <li class='active' ><button class='navbar-toggle collapse in' data-toggle='collapse' id='menu-toggle-2'>
-                                <span class='glyphicon glyphicon-th-large' aria-hidden='true'></span>$upper_user</button>
+                                $upper_user</button>
                               </li>
                             "
                             ?>
@@ -71,12 +70,7 @@ include "profile_update_check.php";
                   <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
               </li>
               <li>
-                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
-                  <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                      <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Family</a></li>
-                      <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Friend</a></li>
-
-                  </ul>
+                  <a href="../contact/contact.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
               </li>
               <li>
                   <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Overview</a>

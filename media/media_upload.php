@@ -12,11 +12,12 @@ if(!$_SESSION["username"]){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>MeTube-Channel: Media Upload</title>
+    <title>MeTube: Media Upload</title>
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/simple-sidebar.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/default.css" />
 
 </head>
 <?php
@@ -37,7 +38,7 @@ $Sex = $profile[4];
                   <?php
                   echo "
                     <button type='button' class='navbar-toggle collapsed' data-toggle='collapse'  id='menu-toggle'>
-                      <span class='glyphicon glyphicon-th-large' aria-hidden='true'></span>$upper_user
+                      $upper_user
                     </button>
                   "
                   ?>
@@ -52,7 +53,7 @@ $Sex = $profile[4];
                             <?php
                             echo "
                               <li class='active' ><button class='navbar-toggle collapse in' data-toggle='collapse' id='menu-toggle-2'>
-                                <span class='glyphicon glyphicon-th-large' aria-hidden='true'></span>$upper_user</button>
+                                $upper_user</button>
                               </li>
                             "
                             ?>
@@ -70,39 +71,34 @@ $Sex = $profile[4];
             <li class="active">
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span> Channel</a>
               <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                <li><a href="media_under_channel.php">Your Media</a></li>
-                <li class="active"><a href="media_upload.php">Upload New Media</a></li>
-                <li><a href="#">Playlists</a></li>
+                <li><a href="#">link1</a></li>
+                <li  class="active"><a href="media_upload.php">Upload New Media</a></li>
               </ul>
             </li>
-            <li>
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
-            </li>
-            <li>
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
-              <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Family</a></li>
-                <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Friend</a></li>
-              </ul>
-            </li>
-            <li>
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Downloaded Media</a>
-            </li>
-            <li>
-              <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Events</a>
-            </li>
-            <li>
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-youtube-play fa-stack-1x "></i></span>About</a>
-            </li>
-            <li>
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
-            </li>
-            <li>
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>Contact</a>
-            </li>
-            <li>
-              <a href="../login_register/logout.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Logout</a>
-            </li>
+              <li>
+                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
+              </li>
+              <li>
+                  <a href="../contact/contact.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
+              </li>
+              <li>
+                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Overview</a>
+              </li>
+              <li>
+                  <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Events</a>
+              </li>
+              <li>
+                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-youtube-play fa-stack-1x "></i></span>About</a>
+              </li>
+              <li>
+                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
+              </li>
+              <li>
+                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>Contact</a>
+              </li>
+              <li>
+                  <a href="../login_register/logout.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Logout</a>
+              </li>
           </ul>
       </div><!-- /#sidebar-wrapper -->
       <!-- Page Content -->
@@ -112,7 +108,7 @@ $Sex = $profile[4];
                   <div class="col-lg-12">
                     <form method="post" action="media_upload_process.php" enctype="multipart/form-data">
                       <h2>Upload Media</h2>
-                      <label for="file"><b>Please select a file to upload (should not include special characters).</b></label><br>
+                      <label for="file"><b>Please select a file to upload. </b></label><br>
                       <input type="file" name="file"><br>
 
                       <label><b>Please provide supplementary information of the file.</b></label><br>
@@ -146,6 +142,7 @@ $Sex = $profile[4];
                           <option value="Video: movie">movie</option>
                           <option value="Video: other">other</option>
                         </optgroup>
+                        <option value="Other" selected>Other</option>
                       </select><br>
 
                       <!--Create a drop down list to list options for privacy-->
