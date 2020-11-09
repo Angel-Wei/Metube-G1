@@ -70,7 +70,6 @@ if(isset($_POST['submit'])){
   if ($username!="" and $psw!="" and $email!="" and $sex!=""){
     if (count($signin_error) == 0){
       insert_usr($username, $psw, $email, $sex);
-      insert_contact_instance($username);
       header('Location: login.php');
     }
   }

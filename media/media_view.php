@@ -69,7 +69,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 												";
 										}
 										?>
-                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -96,11 +95,32 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					$type=$result_row[12];
 					$viewcount=$result_row[14];
 					updateMediaTime($mediaid); // update the last access time of the current media(in table media)
-					updateViewCount($mediaid, $viewcount); // update the viewcount: increment by 1
+					// updateViewCount($mediaid, $viewcount); // update the viewcount: increment by 1
 
-					// check if the media is pulic which doesn't require registration
+					// check if the media is pulic
 					if ($access=="Public"){
-						play_media($title, $filepath, $description, $type);
+						//  cases in which registration is not required
+						if (!isset($_SESSION['username']))
+						{
+							play_media($title, $filepath, $description, $type);
+							updateViewCount($mediaid, $viewcount); // update the viewcount: increment by 1
+						}
+						// for a registered user
+						else if(isset($_SESSION['username']))
+						{
+							$verify = block_or_not($_SESSION['username'], $uploaded_by);
+							if ($verify == 0) // the current user is not blocked
+							{
+								play_media($title, $filepath, $description, $type);
+								updateViewCount($mediaid, $viewcount);
+							}
+							else if($verify == 1)
+							{
+								echo "<h3>".$title." (type: ".$type.")</h3>";
+								echo '<h4>Sorry, you do not have access to this media file though it is for public. You are blocked.</h4>';
+								echo '<img src="../img/oops.jpg"'.' style="width: 50%; height: 50%; border:5px solid #8bcdcd; margin:10px; float:up"/>';
+							}
+						}
 					}
 
 					// if the media is private
@@ -109,6 +129,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						if(isset($_SESSION['username']) and $_SESSION['username']==$uploaded_by)
 						{
 							play_media($title, $filepath, $description, $type);
+							updateViewCount($mediaid, $viewcount);
 						}
 						else
 						{
@@ -123,17 +144,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						// check if the user of current session is a friend of the user who uploads the media or the user himself
 						if (isset($_SESSION['username'])){
 							$current_user = $_SESSION['username'];
-							$verify = contact_or_not($uploaded_by, $current_user);
+							$verify = contact_or_not($current_user, $uploaded_by);
 
-							if ($verify==1 or $uploaded_by==$current_user)
+							// if two users are contacts and the current user is not blocked
+							if (($verify==1 or $uploaded_by==$current_user) and block_or_not($current_user, $uploaded_by)==0)
 							{
 								play_media($title, $filepath, $description, $type);
+								updateViewCount($mediaid, $viewcount);
 							}
 							// print out the message: the media can only be accessed by friend users.
 							else
 							{
 								echo "<h3>".$title." (type: ".$type.")</h3>";
-								echo '<h4>Sorry, you do not have access to this media file. It is only accessed by friend users.</h4>';
+								echo '<h4>Sorry, you do not have access to this media file. It is only accessed by unblocked, friend users.</h4>';
 								echo '<img src="../img/oops.jpg"'.' style="width: 50%; height: 50%; border:5px solid #8bcdcd; margin:10px; float:up"/>';
 							}
 						}

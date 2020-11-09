@@ -24,8 +24,8 @@ if(isset($_POST['submit']))
 	// Public: Allow everyone to comment and rate
 	if($comment_permit=="Public")
 	{
-		// if this is a user
-		if(isset($_SESSION['username']))
+		// if the current viewer is a registered user and is not blocked
+		if(isset($_SESSION['username']) and block_or_not($_SESSION['username'], $uploaded_by) == 0)
 		{
       $current_user = $_SESSION['username'];
       $query1 = "insert into comment values (NULL,'$current_user','$mediaid','$comment',current_timestamp,'$score');";
@@ -35,9 +35,22 @@ if(isset($_POST['submit']))
 			echo "<script type='text/javascript'>alert('The comment and rating score is submitted!');
 			window.location='../index.php';</script>";
 		}
-		else
+    // if the current viewer is a registered user and is blocked
+    if(isset($_SESSION['username']) and block_or_not($_SESSION['username'], $uploaded_by) == 1)
+    {
+      echo "<script type='text/javascript'>alert('You are blocked and cannot comment on or rate this media.');
+			window.location='../index.php';</script>";
+    }
+    // the media cannot be commented and rated by the same user who uploaded the file
+    if(isset($_SESSION['username']) and $_SESSION['username'] == $uploaded_by)
+    {
+      echo "<script type='text/javascript'>alert('You cannot comment and rate the media uploaded by yourself.');
+			window.location='../index.php';</script>";
+    }
+
+    // when the viewer is not a registered user in metube
+		else if(!isset($_SESSION['username']))
 		{
-			// when the viewer is not a registered user in metube
 			$query2 = "insert into comment(mediaid, comment, submission_time, score) values ('$mediaid', '$comment', current_timestamp, '$score');";
 			$result2=mysql_query($query2)
 			or die("Cannot query the database and insert comment information" .mysql_error());
@@ -53,7 +66,7 @@ if(isset($_POST['submit']))
 		if(isset($_SESSION['username']))
 		{
 			// check if the current user is a friend of the user who uploaded the media
-			$verify = contact_or_not($uploaded_by, $_SESSION['username']);
+			$verify = contact_or_not($_SESSION['username'], $uploaded_by);
 			if($verify==1)
 			{
 				$query2 = "insert into comment values (NULL, ".$_SESSION['username'].",".$mediaid.",".$comment.", NOW(),".$score.");";
@@ -63,6 +76,11 @@ if(isset($_POST['submit']))
 				echo "<script type='text/javascript'>alert('The comment and rating score is submitted!');
 				window.location='../index.php';</script>";
 			}
+      else
+      {
+        echo "<script type='text/javascript'>alert('You are not a friend or family user to submit comments and ratings.');
+				window.location='../index.php';</script>";
+      }
 		}
 		// comment and rating score cannot be submitted by the same user who uploaded the file
 		else if(isset($_SESSION['username']) and $_SESSION['username']==$uploaded_by)
@@ -83,7 +101,7 @@ if(isset($_POST['submit']))
 
 	else if($comment_permit=="Private")
 	{
-		echo "<script type='text/javascript'>alert('Sorry, the comment and rating features are not enables for this media');
+		echo "<script type='text/javascript'>alert('Sorry, the comment and rating features are not enabled for this media');
 		window.location='../index.php';</script>";
 	}
 }
