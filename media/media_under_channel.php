@@ -88,46 +88,45 @@ $Sex = $profile[4];
                           </ul>
               </div><!-- bs-example-navbar-collapse-1 -->
   </nav>
-  <div id="sidebar-wrapper">
+  <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
 
-    <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-        <li>
-          <a href="../account/profile.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Profile </a>
-        </li>
-        <li  class="active">
-          <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span> Channel</a>
-          <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-            <!-- Button for showing all uploaded media -->
-            <li  class="active"><a href="media_under_channel.php">Your Media</a></li>
-            <!-- Button for upload new media -->
-            <li><a href="media_upload.php">Upload New Media</a></li>
-            <!-- Button for Playlists -->
-            <li><a href="#">Playlists</a></li>
+        <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+            <li>
+              <a href="../account/profile.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Profile </a>
+            </li>
+            <li class="active">
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span> Channel</a>
+              <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                <li class="active"><a href="media_under_channel.php">Your Media</a></li>
+                <li><a href="media_upload.php">Upload New Media</a></li>
+                <li><a href="#">Playlists</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
+            </li>
+            <li>
+                <a href="../contact/contact.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span>Contact</a>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Downloaded Media</a>
+            </li>
+            <li>
+              <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Events</a>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-youtube-play fa-stack-1x "></i></span>About</a>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
+            </li>
+            <li>
+              <a href="../login_register/logout.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Logout</a>
+            </li>
           </ul>
-        </li>
-        <li>
-          <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
-        </li>
-        <li>
-            <a href="../contact/contact.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
-        </li>
-        <li>
-          <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Downloaded Media</a>
-        </li>
-        <li>
-          <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Events</a>
-        </li>
-        <li>
-          <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-youtube-play fa-stack-1x "></i></span>About</a>
-        </li>
-        <li>
-          <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
-        </li>
-        <li>
-          <a href="../login_register/logout.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Logout</a>
-        </li>
-      </ul>
-  </div><!-- /#sidebar-wrapper -->
+      </div><!-- /#sidebar-wrapper -->
   <!-- Page Content: display the uploaded media-Image-->
   <div id="page-content-wrapper">
     <h2>Media uploaded by <?php echo $user?> (click to view the media)</h2></hr>

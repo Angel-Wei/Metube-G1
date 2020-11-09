@@ -18,9 +18,33 @@ function add_block($accountid1, $accountid2) {
 	mysql_free_result($result);
 }
 
+// used by media/media_view.php: check if the user of current session is blocked to view media
+function block_or_not($current_user, $uploaded_by)
+{
+	$id1_result = mysql_query("select * from account where username='$current_user'");
+	$id1_row = mysql_fetch_row($id1_result);
+	$id1 = $id1_row[0];
+	$id2_result = mysql_query("select * from account where username='$uploaded_by'");
+	$id2_row = mysql_fetch_row($id2_result);
+	$id2 = $id2_row[0];
 
+	$query = "select * from contact where accountid1='$id1' and accountid2='$id2'";
+	$result = mysql_query($query)
+	   or die ("block_or_not() failed. Could not query the database: <br />". mysql_error());
+	$count = mysql_num_rows($result);
 
-
+	if($count == 0) // the default is no block
+	{
+		return 0;
+	}
+	else
+	{
+		$row = mysql_fetch_row($result);
+		if ($row[4] == 0) return 0;
+		else if($row[4] == 1) return 1;
+	}
+	mysql_free_result($result);
+}
 
 //used by contact_process.php, unidirectional relationship: from accountid1 to accountid2
 function add_contact($contact_type, $accountid1, $accountid2) {
@@ -46,14 +70,6 @@ function add_contact($contact_type, $accountid1, $accountid2) {
 	mysql_free_result($result);
 }
 
-// function block_user($accountid1, $accountid2) {
-
-
-
-
-
-
-
 //used by profile.php
 function get_user_profile($username) {
 	$query = "select * from account where username='$username'";
@@ -63,7 +79,6 @@ function get_user_profile($username) {
   return $row;
 	mysql_free_result($result);
 }
-
 
 function update_profile_check($username, $email) {
 	$query = "select * from account where email!='$email' && username='$username'";
@@ -155,22 +170,6 @@ function user_pass_check($username, $password)
 	mysql_free_result($result); // free memory
 }
 
-// used by register_check.php-Insert one row, one column of the same username into contact table
-function insert_contact_instance($username)
-{
-	// the default value is 0, once two users are friends, the value will be set to 1 in other functions
-	$query1 = "alter table contact add ".$username." boolean default '0';";
-	$query2 = "insert into contact (username) values ('".$username."');";
-	$result1 = mysql_query($query1);
-	$result2 = mysql_query($query2);
-	if (!$result1 and !$result2)
-	{
-	   die ("insert_contact_instance() failed. Could not query the database: <br />". mysql_error());
-	}
-	mysql_free_result($result1); // free memory
-	mysql_free_result($result2); // free memory
-}
-
 // used by ../media/media_view.php
 function updateMediaTime($mediaid)
 {
@@ -193,14 +192,31 @@ function updateViewCount($mediaid, $viewcount)
 }
 
 // check if two users are friends, used by ../media/media_view.php
-function contact_or_not($uploaded_by, $current_user)
+function contact_or_not($current_user, $uploaded_by)
 {
-	$contact_query="select ".$current_user." from contact where username='$uploaded_by';";
-	$contact_result=mysql_query($contact_query)
-	or die("Cannot query the database" .mysql_error());
-	$line=mysql_fetch_row($contact_result);
-	if($line==1) return 1;
-	else return 0;
+	$id1_result = mysql_query("select * from account where username='$current_user'");
+	$id1_row = mysql_fetch_row($id1_result);
+	$id1 = $id1_row[0];
+	$id2_result = mysql_query("select * from account where username='$uploaded_by'");
+	$id2_row = mysql_fetch_row($id2_result);
+	$id2 = $id2_row[0];
+
+	$query = "select * from contact where accountid1='$id1' and accountid2='$id2'";
+	$result = mysql_query($query)
+	   or die ("block_or_not() failed. Could not query the database: <br />". mysql_error());
+	$count = mysql_num_rows($result);
+
+	if($count == 0) // the default is not contact
+	{
+		return 0;
+	}
+
+	else
+	{
+		$row = mysql_fetch_row($result);
+		if ($row[3] == 1 or $row[3] ==2) return 1; // return 1 if two users are either "family" or "friend"
+		else return 0;
+	}
 }
 
 function upload_error($result)
@@ -222,11 +238,6 @@ function upload_error($result)
 	case 7:
 		return  "Upload file failed";
 	}
-}
-
-function other()
-{
-	//You can write your own functions here.
 }
 
 ?>

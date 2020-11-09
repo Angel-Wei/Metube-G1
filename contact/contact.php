@@ -43,26 +43,27 @@ $accountid1 = $row[0];
                   <?php
                   echo "
                     <button type='button' class='navbar-toggle collapsed' data-toggle='collapse'  id='menu-toggle'>
-                      $upper_user
+                      <span class='glyphicon glyphicon-th-large' aria-hidden='true'></span>$upper_user
                     </button>
                   "
                   ?>
+
                   <a class="navbar-brand" href="../index.php"> <img src="../assets/images/logo.png" style="margin:-15px 10px 40px 0px"  width="190" alt="MeTube"></a>
                   <input type="text" style="margin-top:10px;margin-left:30px" size="25" placeholder="Search..">
 
               </div><!-- navbar-header-->
 
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                          <ul class="nav navbar-nav">
-                           <!-- show username on toggle button -->
-                            <?php
-                            echo "
-                              <li class='active' ><button class='navbar-toggle collapse in' data-toggle='collapse' id='menu-toggle-2'>
-                                $upper_user</button>
-                              </li>
-                            "
-                            ?>
-                          </ul>
+                <ul class="nav navbar-nav">
+                 <!-- show username on toggle button -->
+                  <?php
+                  echo "
+                    <li class='active' ><button class='navbar-toggle collapse in' data-toggle='collapse' id='menu-toggle-2'>
+                      <span class='glyphicon glyphicon-th-large' aria-hidden='true'></span>$upper_user</button>
+                    </li>
+                  "
+                  ?>
+                </ul>
               </div><!-- bs-example-navbar-collapse-1 -->
   </nav>
   <div id="wrapper">
