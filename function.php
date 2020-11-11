@@ -1,7 +1,14 @@
 <?php
 include "mysqlClass.inc.php";
 
+//used by unblock.php
+function unblock($accountid1, $accountid2) {
+	mysql_query("UPDATE contact SET block=0 WHERE accountid1='$accountid1' && accountid2='$accountid2'");
+}
 
+
+
+//used by add_block.php
 function add_block($accountid1, $accountid2) {
 	$query = "select * from contact where accountid1='$accountid1' && accountid2='$accountid2'";
 	$result = mysql_query( $query )
@@ -46,7 +53,7 @@ function block_or_not($current_user, $uploaded_by)
 	mysql_free_result($result);
 }
 
-//used by contact_process.php, unidirectional relationship: from accountid1 to accountid2
+//used by add_contact.php, unidirectional relationship: from accountid1 to accountid2
 function add_contact($contact_type, $accountid1, $accountid2) {
 	$query = "select * from contact where accountid1='$accountid1' && accountid2='$accountid2'";
 	$result = mysql_query( $query )
@@ -69,6 +76,20 @@ function add_contact($contact_type, $accountid1, $accountid2) {
 
 	mysql_free_result($result);
 }
+
+
+//used by remove_contact.php
+function remove_contact($accountid1, $accountid2) {
+	$query = "select * from contact where accountid1='$accountid1' && accountid2='$accountid2'";
+	$result = mysql_query( $query )
+	   or die ("remove_contact() failed. Could not query the database: <br />". mysql_error());
+	$count = mysql_num_rows($result);
+
+	mysql_query("UPDATE contact SET type=0 WHERE accountid1='$accountid1' && accountid2='$accountid2'");
+	mysql_free_result($result);
+}
+
+
 
 //used by profile.php
 function get_user_profile($username) {

@@ -133,6 +133,17 @@ $accountid1 = $row[0];
                               		or die ("get_all_users failed. Could not query the database: <br />". mysql_error());
                               	while($row = mysql_fetch_row($result)) {
                                   $accountid2 = $row[0];
+                                  $result_contact = mysql_query( "select * from contact where accountid1='$accountid1' && accountid2='$accountid2'" );
+                                  $row_contact = mysql_fetch_row($result_contact);
+                                  if (mysql_num_rows($result_contact) != 0) {
+                                    $contact_type = $row_contact[3];
+                                    $block_status = $row_contact[4];
+                                  }
+                                  else {
+                                    $contact_type = 0;
+                                    $block_status = 0;
+                                  }
+
                                   echo "
                                   <tr>
                                       <td class='td1'>$row[1]</td>
@@ -140,13 +151,45 @@ $accountid1 = $row[0];
                                       <td class='td3'>$row[4]</td>
                                       <td class='td4'>
                                       <select name='addContact' onchange='contact_process(this.value,$accountid1,$accountid2)'>
-                                                            <option value=''>Add</option>
-                                                            <option value='Family'>Family</option>;
-                                                            <option value='Friend'>Friend</option>;
-                                          </select><br></td>
-                                      <td class='td5'><a href='#' onclick='block_user($accountid1,$accountid2)' style='color:#cc0000'>Block</a></td>
-                                  </tr>
                                   ";
+                                      if ($contact_type == 0) {
+                                          echo "
+                                              <option value='' selected>Add</option>
+                                              <option value='Family'>Family</option>
+                                              <option value='Friend'>Friend</option>
+                                              </select><br></td>
+                                              ";
+                                      }
+                                      elseif ($contact_type == 1) {
+                                          echo "
+                                              <option value=''>Add</option>
+                                              <option value='Family' selected>Family</option>
+                                              <option value='Friend'>Friend</option>
+                                              </select><br></td>
+                                              ";
+                                      }
+                                      elseif ($contact_type == 2) {
+                                          echo "
+                                              <option value=''>Add</option>
+                                              <option value='Family'>Family</option>
+                                              <option value='Friend' selected>Friend</option>
+                                              </select><br></td>
+                                              ";
+                                      }
+
+                                  if ($block_status == 0) {
+                                    echo "
+                                      <td class='td5'><a href='#' onclick='block_user($accountid1,$accountid2)' style='color:#cc0000'>Block</a></td>
+                                    </tr>
+                                    ";
+                                  }
+                                  else {
+                                    echo "
+                                      <td class='td5' ><i>Blocked</i></td>
+                                    </tr>
+                                    ";
+                                  }
+                                  mysql_free_result($result_contact);
                               	}
                               	mysql_free_result($result);
                                ?>
@@ -157,7 +200,7 @@ $accountid1 = $row[0];
 
                         <div class="wrap2" style="margin:0 auto;"> <!--margin:0 auto doesn't work here,but work on below <table>-->
                           <table class="head">
-                            <caption style="font-size:16px;margin-bottom:5px;">Family Contact</caption>
+                            <caption style="font-size:16px;margin-bottom:5px;">Family List</caption>
                             <tr>
                             <th class="th1">Name</th>
                             <th class="th2">Email</th>
@@ -168,20 +211,20 @@ $accountid1 = $row[0];
                           <div>
                             <table >
                               <?php
-                                $query = "select * from contact WHERE accountid1='$accountid1'
-                                          && type=1 && block=0";
+                                $query = "select * from contact WHERE accountid1='$accountid1' && type=1";
                                 $result = mysql_query( $query )
                                   or die ("get_family_contact failed. Could not query the database: <br />". mysql_error());
                                 while($row = mysql_fetch_row($result)) {
                                   $accountid2 = $row[2];
                                   $result_contact = mysql_query( "select * from account WHERE accountid='$accountid2'" );
                                   $row_contact = mysql_fetch_row($result_contact);
+                                  $contact_type = "Family";
                                   echo "
                                     <tr>
                                       <td class='td1'> $row_contact[1] </td>
                                       <td class='td2'> $row_contact[3] </td>
                                       <td class='td3'> $row_contact[4] </td>
-                                      <td class='td4'><a href='#' onclick='remove_contact($accountid1,$accountid2)'> Remove </a></td>
+                                      <td class='td4'><a href='#' onclick='contact_remove(1,$accountid1,$accountid2)'> Remove </a></td>
                                     </tr>
                                     ";
                                 mysql_free_result($result_contact);
@@ -196,7 +239,7 @@ $accountid1 = $row[0];
 
                         <div class="wrap2" style="margin:0 auto;"> <!--margin:0 auto doesn't work here,but work on below <table>-->
                           <table class="head">
-                            <caption style="font-size:16px;margin-bottom:5px;">Friend Contact</caption>
+                            <caption style="font-size:16px;margin-bottom:5px;">Friend List</caption>
                             <tr>
                             <th class="th1">Name</th>
                             <th class="th2">Email</th>
@@ -207,20 +250,20 @@ $accountid1 = $row[0];
                           <div>
                             <table >
                               <?php
-                                $query = "select * from contact WHERE accountid1='$accountid1'
-                                          && type=2 && block=0";
+                                $query = "select * from contact WHERE accountid1='$accountid1' && type=2";
                                 $result = mysql_query( $query )
                                   or die ("get_family_contact failed. Could not query the database: <br />". mysql_error());
                                 while($row = mysql_fetch_row($result)) {
                                   $accountid2 = $row[2];
                                   $result_contact = mysql_query( "select * from account WHERE accountid='$accountid2'" );
                                   $row_contact = mysql_fetch_row($result_contact);
+                                  $contact_type = "Friend";
                                   echo "
                                     <tr>
                                       <td class='td1'> $row_contact[1] </td>
                                       <td class='td2'> $row_contact[3] </td>
                                       <td class='td3'> $row_contact[4] </td>
-                                      <td class='td4'><a href='#' onclick='remove_contact($accountid1,$accountid2)'> Remove </a></td>
+                                      <td class='td4'><a href='#' onclick='contact_remove(2,$accountid1,$accountid2)'> Remove </a></td>
                                     </tr>
                                     ";
                                 mysql_free_result($result_contact);
@@ -233,7 +276,40 @@ $accountid1 = $row[0];
                         <br><br>
 
 
-
+                        <div class="wrap2" style="margin:0 auto;"> <!--margin:0 auto doesn't work here,but work on below <table>-->
+                          <table class="head">
+                            <caption style="font-size:16px;margin-bottom:5px;">Blocked List</caption>
+                            <tr>
+                            <th class="th1">Name</th>
+                            <th class="th2">Email</th>
+                            <th class="th3">Sex</th>
+                            <th class="th4">Unblock</th>
+                            </tr>
+                          </table>
+                          <div>
+                            <table >
+                              <?php
+                                $query = "select * from contact WHERE accountid1='$accountid1' && block=1";
+                                $result = mysql_query( $query );
+                                while($row = mysql_fetch_row($result)) {
+                                  $accountid2 = $row[2];
+                                  $result_contact = mysql_query( "select * from account WHERE accountid='$accountid2'" );
+                                  $row_contact = mysql_fetch_row($result_contact);
+                                  echo "
+                                    <tr>
+                                      <td class='td1'> $row_contact[1] </td>
+                                      <td class='td2'> $row_contact[3] </td>
+                                      <td class='td3'> $row_contact[4] </td>
+                                      <td class='td4'><a href='#' onclick='unblock_user($accountid1,$accountid2)'> Unblock </a></td>
+                                    </tr>
+                                    ";
+                                }
+                                mysql_free_result($result);
+                              ?>
+                            </table>
+                          </div>
+                        </div>
+                        <br><br>
 
 
 
