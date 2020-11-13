@@ -141,3 +141,15 @@ CREATE TABLE IF NOT EXISTS `contact` (
   `block` int(2) NOT NULL DEFAULT 0,
   PRIMARY KEY (`contactid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+CREATE TABLE IF NOT EXISTS `message` (
+  `messageid` int(11) NOT NULL AUTO_INCREMENT,
+  `from_id` int(11) NOT NULL,
+  `to_id` int(11) NOT NULL,
+  `subject` varchar(64),
+  `content` varchar(240),
+  `message_time` varchar(64),
+  PRIMARY KEY (`messageid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
