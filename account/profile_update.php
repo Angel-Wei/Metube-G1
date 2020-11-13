@@ -56,41 +56,48 @@ include "profile_update_check.php";
 
 
           <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-            <li  class="active">
-                <a href="profile.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Profile </a>
-            </li>
-              <li>
-                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span> Channel</a>
-                     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                      <li><a href="#">link1</a></li>
-                      <li><a href="../media/media_upload.php">Upload New Media</a></li>
-                  </ul>
-              </li>
-              <li>
-                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
-              </li>
-              <li>
-                  <a href="../contact/contact.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
-              </li>
-              <li>
-                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Overview</a>
-              </li>
-              <li>
-                  <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Events</a>
-              </li>
-              <li>
-                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-youtube-play fa-stack-1x "></i></span>About</a>
-              </li>
-              <li>
-                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
-              </li>
-              <li>
-                  <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>Contact</a>
-              </li>
-              <li>
-                  <a href="../login_register/logout.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Logout</a>
-              </li>
-          </ul>
+          <li class="active">
+            <a href="profile.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Profile </a>
+          </li>
+          <li>
+            <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span> Channel</a>
+            <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+              <!-- Button for showing all uploaded media -->
+              <li><a href="../media/media_under_channel.php">Your Media</a></li>
+              <!-- Button for upload new media -->
+              <li><a href="../media/media_upload.php">Upload New Media</a></li>
+              <!-- Button for Playlists -->
+              <li><a href="#">Playlists</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
+          </li>
+          <li>
+            <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Downloaded Media</a>
+          </li>
+          <li>
+              <a href="../contact/contact.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
+          </li>
+          <li>
+            <a href="../message/message.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-envelope-square fa-stack-1x "></i></span>Message</a>
+          </li>
+          <li>
+            <a href="../discussion/disucssion.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-comments fa-stack-1x "></i></span>Discussion</a>
+          </li>
+          <li>
+            <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Events</a>
+          </li>
+          <li>
+            <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-youtube-play fa-stack-1x "></i></span>About</a>
+          </li>
+          <li>
+            <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
+          </li>
+          <li>
+            <a href="../login_register/logout.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Logout</a>
+          </li>
+        </ul>
       </div><!-- /#sidebar-wrapper -->
       <!-- Page Content -->
       <div id="page-content-wrapper">

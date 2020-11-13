@@ -3,10 +3,12 @@ include_once "../function.php";
 session_start();
 $user = $_SESSION['username'];
 $upper_user = strtoupper($user);
-$profile = get_user_profile($user);
-$password = $profile[2];
-$email = $profile[3];
-$Sex = $profile[4];
+$query="SELECT accountid FROM account WHERE username = '$user'";
+$result = mysql_query( $query );
+$row = mysql_fetch_row($result);
+$accountid1 = $row[0];
+mysql_free_result($result);
+$msg_id = $_GET['msg_id']; //from message.php, $_POST doesn't work
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +23,44 @@ $Sex = $profile[4];
     <link href="../assets/css/simple-sidebar.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <style>table,th,td {border: none;} td,th{height:30px;width:150px;font-size: 16px; }</style>
+    <link href="../assets/css/contact_table.css" rel="stylesheet">
+    <style> a {color:#4785b8} </style>
+    <style>
+    fieldset.scheduler-border {
+      width: 630px;
+      border: 1px groove #ddd !important;
+      padding: 0 1em 1em 1em !important;
+      /* margin: 0 0 1.5em 0 !important; */
+      -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+      margin: 0 auto;
+    }
+
+    legend.scheduler-border {
+      font-size: 1.0em !important;
+      /* font-weight: bold !important; */
+      text-align: left !important;
+      width:auto;
+      padding:0 10px;
+      border-bottom:none;
+      margin: 0 auto;
+    }
+    </style>
+
+    <script>
+    function replyBox($msg_id) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("reply").innerHTML = this.responseText;
+        }
+      };
+      var msg_id = $msg_id;
+      xhttp.open("GET", "reply_message.php?msg_id="+$msg_id, true);
+      xhttp.send();
+    }
+    </script>
+
 
 </head>
 
@@ -62,8 +101,8 @@ $Sex = $profile[4];
       <div id="sidebar-wrapper">
 
         <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-            <li class="active">
-              <a href="profile.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Profile </a>
+            <li>
+              <a href="../account/profile.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Profile </a>
             </li>
             <li>
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span> Channel</a>
@@ -85,7 +124,7 @@ $Sex = $profile[4];
             <li>
                 <a href="../contact/contact.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
             </li>
-            <li>
+            <li class="active">
               <a href="../message/message.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-envelope-square fa-stack-1x "></i></span>Message</a>
             </li>
             <li>
@@ -100,6 +139,7 @@ $Sex = $profile[4];
             <li>
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
             </li>
+
             <li>
               <a href="../login_register/logout.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Logout</a>
             </li>
@@ -110,33 +150,64 @@ $Sex = $profile[4];
           <div class="container-fluid xyz">
               <div class="row">
                   <div class="col-lg-12">
-                      <h1>User Profile</h1><br>
-                      <a> <img src="../img/profile_user_icon.png" style="margin:-15px 10px 40px 0px"  width="190" alt="MeTube"></a>
-                      <a href="profile_update.php" style="padding-left:40px;font-size:30px;text-decoration:underline;color:green" > Edit</a>
-                      <br>
+                      <h4 style="text-align: center;margin-top:-5px;">
+                          <a href="message.php">Message Box</a> |
+                          <a href="write_message.php">Compose</a></h4><br>
+                      <div class="wrap3" style="margin:0 auto;"> <!--margin:0 auto doesn't work here,but work on below <table>-->
+                        <table class="head">
+                          <tr>
+                          <th class="th1">From</th>
+                          <th class="th1">To</th>
+                          <th class="th6">Subject</th>
+                          <th class="th2">Time</th>
+                          </tr>
+                        </table>
+                        <div>
+                            <?php
+                              $query = "select * from message WHERE messageid='$msg_id'";
+                              $result = mysql_query( $query );
+                              $row = mysql_fetch_row($result);
+                              $from_id = $row[1];
+                              $to_id = $row[2];
+                              $subject = $row[3];
+                              $content = $row[4];
+                              $time = $row[5];
+                              $result_from = mysql_query("select * from account WHERE accountid='$from_id'" );
+                              $result_to = mysql_query("select * from account WHERE accountid='$to_id'" );
+                              $from_name = mysql_fetch_row($result_from)[1];
+                              $to_name = mysql_fetch_row($result_to)[1];
+                              echo "
+                                <table>
+                                <tr>
+                                  <td class='td1'> $from_name </td>
+                                  <td class='td1'> $to_name </td>
+                                  <td class='td6'> $subject </td>
+                                  <td class='td2'> $time </td>
+                                </tr>
+                                </table><br><br>
+                          </div>
+                      </div>
+                      ";
 
-                      <table cellspacing="0" cellpadding="0">
-                        <?php
-                        echo "
-                        <tr>
-                          <td style='font-weight: bold'>Username</td>
-                          <td>$user</td>
-                        </tr>
-                        <tr>
-                          <td style='font-weight: bold'>Sex</td>
-                          <td>$Sex</td>
-                        </tr>
-                        <tr>
-                          <td style='font-weight: bold'>Email</td>
-                          <td>$email</td>
-                        </tr>
-                      <tr>
-                          <td style='font-weight: bold'>Password</td>
-                          <td>*</td>
-                        </tr>
-                      "
-                      ?>
-                      </table>
+                      echo "
+                        <fieldset class='scheduler-border'>
+                        <legend class='scheduler-border'>Content</legend>
+                        <p>$content</p>
+                        </fieldset>
+                        <br>
+                        <div id='reply' style='text-align: center'>
+                        <button type='button' onclick=replyBox($msg_id)>Reply</button><br/><br/>
+                        <form method='POST' action='delete_message.php?msg_id=$msg_id' enctype='multipart/form-data'>
+                        <input name='delete_msg' type='submit' value='Delete'>
+                        </form>
+                        <br/>
+                        <button type='button' onclick='location.href=\"message.php\"'>Back</button>
+                        </div>
+                        ";
+                      mysql_free_result($result_from);
+                      mysql_free_result($result_to);
+                      mysql_free_result($result);
+                    ?>
 
                   </div>
               </div>
@@ -144,6 +215,8 @@ $Sex = $profile[4];
       </div>
       <!-- /#page-content-wrapper -->
   </div>
+
+
   <!-- /#wrapper -->
   <!-- jQuery -->
   <!-- <script src="../Metube-G1/assets/js/jquery.min.js"></script> -->

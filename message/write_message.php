@@ -1,13 +1,15 @@
 <?php
-include_once "../function.php";
 session_start();
+include_once "../function.php";
 $user = $_SESSION['username'];
 $upper_user = strtoupper($user);
-$profile = get_user_profile($user);
-$password = $profile[2];
-$email = $profile[3];
-$Sex = $profile[4];
+$query="SELECT accountid FROM account WHERE username = '$user'";
+$result = mysql_query( $query );
+$row = mysql_fetch_row($result);
+$accountid1 = $row[0];
+mysql_free_result($result);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,8 +23,21 @@ $Sex = $profile[4];
     <link href="../assets/css/simple-sidebar.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <style>table,th,td {border: none;} td,th{height:30px;width:150px;font-size: 16px; }</style>
-
+    <link href="../assets/css/contact_table.css" rel="stylesheet">
+    <style> a {color:#4785b8} </style>
+    <script>
+    function validateForm() {
+      var subject = document.forms["sendForm"]["subject"].value;
+      var content = document.forms["sendForm"]["content"].value;
+      if (subject == '' || content == '') {
+            alert("Both subject and content should be filled out!");
+            return false;
+      } else {
+            alert("Message sent.");
+            return true;
+      }
+    }
+    </script>
 </head>
 
 
@@ -62,8 +77,8 @@ $Sex = $profile[4];
       <div id="sidebar-wrapper">
 
         <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-            <li class="active">
-              <a href="profile.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Profile </a>
+            <li>
+              <a href="../account/profile.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Profile </a>
             </li>
             <li>
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span> Channel</a>
@@ -85,7 +100,7 @@ $Sex = $profile[4];
             <li>
                 <a href="../contact/contact.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
             </li>
-            <li>
+            <li class="active">
               <a href="../message/message.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-envelope-square fa-stack-1x "></i></span>Message</a>
             </li>
             <li>
@@ -100,6 +115,7 @@ $Sex = $profile[4];
             <li>
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
             </li>
+
             <li>
               <a href="../login_register/logout.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Logout</a>
             </li>
@@ -110,40 +126,60 @@ $Sex = $profile[4];
           <div class="container-fluid xyz">
               <div class="row">
                   <div class="col-lg-12">
-                      <h1>User Profile</h1><br>
-                      <a> <img src="../img/profile_user_icon.png" style="margin:-15px 10px 40px 0px"  width="190" alt="MeTube"></a>
-                      <a href="profile_update.php" style="padding-left:40px;font-size:30px;text-decoration:underline;color:green" > Edit</a>
-                      <br>
-
-                      <table cellspacing="0" cellpadding="0">
-                        <?php
-                        echo "
-                        <tr>
-                          <td style='font-weight: bold'>Username</td>
-                          <td>$user</td>
-                        </tr>
-                        <tr>
-                          <td style='font-weight: bold'>Sex</td>
-                          <td>$Sex</td>
-                        </tr>
-                        <tr>
-                          <td style='font-weight: bold'>Email</td>
-                          <td>$email</td>
-                        </tr>
-                      <tr>
-                          <td style='font-weight: bold'>Password</td>
-                          <td>*</td>
-                        </tr>
-                      "
-                      ?>
-                      </table>
-
-                  </div>
+                      <h4 style="text-align: center;margin-top:-5px;">
+                          <a href="message.php">Message Box</a> |
+                          <a href="write_message.php">Compose</a></h4><br>
+                      <form name="sendForm" method="POST" action="send_message.php?send_from=<?php echo $accountid1 ?>"
+                            onsubmit="return validateForm()" enctype="multipart/form-data">
+                      <div class="wrap" style="margin:0 auto;">
+                        <table>
+                          <tr>
+                            <td class='td1'> Send to </td>
+                            <td class='td7'>
+                              <select name='send_to'>
+                                <?php
+                                $result = mysql_query( "select * from contact where accountid1='$accountid1' && type!=0 " )
+                                      or die("Could not query the contact database: <br />". mysql_error());;
+                              	while($row = mysql_fetch_row($result)) {
+                                  $accountid2 = $row[2];
+                                  $result_name = mysql_query( "select * from account where accountid='$accountid2'" );
+                                  $row_name = mysql_fetch_row($result_name);
+                                  $contact_name = $row_name[1];
+                                  echo "<option value='$accountid2'>$contact_name</option>";
+                                  mysql_free_result($result_name);
+                                }
+                                mysql_free_result($result);
+                                 ?>
+                              </select>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class='td1'> Subject </td>
+                            <td class='td7'> <input name="subject" type="text" size="51"
+                                  placeholder="Type subject here..." style="border:1px solid #000000"> </input>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class='td1'> Message </td>
+                            <td class='td7'>
+                              <textarea name="content" type="text" cols="50" rows="10"
+                                  placeholder="Type content here..." style="border:1px solid #000000"></textarea>
+                            </td>
+                          </tr>
+                        </table>
+                        </div>
+                        <br>
+                        <div style='text-align: center'>
+                          <input name='send_msg' type='submit' value='Send'><br/><br/>
+                      </form>
+                      <button type='button' onclick='location.href="message.php"'>Cancel</button>
+                     </div>
               </div>
           </div>
       </div>
       <!-- /#page-content-wrapper -->
   </div>
+
   <!-- /#wrapper -->
   <!-- jQuery -->
   <!-- <script src="../Metube-G1/assets/js/jquery.min.js"></script> -->

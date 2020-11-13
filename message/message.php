@@ -3,11 +3,13 @@ include_once "../function.php";
 session_start();
 $user = $_SESSION['username'];
 $upper_user = strtoupper($user);
-$profile = get_user_profile($user);
-$password = $profile[2];
-$email = $profile[3];
-$Sex = $profile[4];
+$query="SELECT accountid FROM account WHERE username = '$user'";
+$result = mysql_query( $query );
+$row = mysql_fetch_row($result);
+$accountid1 = $row[0];
+mysql_free_result($result);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,8 +23,8 @@ $Sex = $profile[4];
     <link href="../assets/css/simple-sidebar.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <style>table,th,td {border: none;} td,th{height:30px;width:150px;font-size: 16px; }</style>
-
+    <link href="../assets/css/contact_table.css" rel="stylesheet">
+    <style> a {color:#4785b8} </style>
 </head>
 
 
@@ -62,8 +64,8 @@ $Sex = $profile[4];
       <div id="sidebar-wrapper">
 
         <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-            <li class="active">
-              <a href="profile.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Profile </a>
+            <li>
+              <a href="../account/profile.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Profile </a>
             </li>
             <li>
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span> Channel</a>
@@ -85,7 +87,7 @@ $Sex = $profile[4];
             <li>
                 <a href="../contact/contact.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
             </li>
-            <li>
+            <li class="active">
               <a href="../message/message.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-envelope-square fa-stack-1x "></i></span>Message</a>
             </li>
             <li>
@@ -100,6 +102,7 @@ $Sex = $profile[4];
             <li>
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
             </li>
+
             <li>
               <a href="../login_register/logout.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Logout</a>
             </li>
@@ -110,33 +113,51 @@ $Sex = $profile[4];
           <div class="container-fluid xyz">
               <div class="row">
                   <div class="col-lg-12">
-                      <h1>User Profile</h1><br>
-                      <a> <img src="../img/profile_user_icon.png" style="margin:-15px 10px 40px 0px"  width="190" alt="MeTube"></a>
-                      <a href="profile_update.php" style="padding-left:40px;font-size:30px;text-decoration:underline;color:green" > Edit</a>
-                      <br>
+                      <h4 style="text-align: center;margin-top:-5px;">
+                          <a href="message.php">Message Box</a> |
+                          <a href="write_message.php">Compose</a></h4><br>
+                      <div class="wrap3" style="margin:0 auto;">
+                        <table class="head">
+                          <tr>
+                          <th class="th1">From</th>
+                          <th class="th1">To</th>
+                          <th class="th6">Subject</th>
+                          <th class="th2">Time</th>
+                          </tr>
+                        </table>
+                        <div>
+                            <?php
+                              $query = "select * from message WHERE from_id='$accountid1' or to_id='$accountid1'";
+                              $result = mysql_query( $query );
+                              while($row = mysql_fetch_row($result)) {
+                                $msg_id = $row[0];
+                                $from_id = $row[1];
+                                $to_id = $row[2];
+                                $subject = $row[3];
+                                $time = $row[5];
+                                $result_from = mysql_query( "select * from account WHERE accountid='$from_id'" );
+                                $result_to = mysql_query( "select * from account WHERE accountid='$to_id'" );
+                                $from_name = mysql_fetch_row($result_from)[1];
+                                $to_name = mysql_fetch_row($result_to)[1];
+                                echo "
+                                 <table>
+                                  <tr>
+                                    <td class='td1'> $from_name </td>
+                                    <td class='td1'> $to_name </td>
+                                    <td class='td6'><a href='display_message.php?msg_id=$msg_id'> $subject </a></td>
+                                    <td class='td2'> $time </td>
+                                  </tr>
+                                  </table>
+                                  ";
+                                mysql_free_result($result_from);
+                                mysql_free_result($result_to);
+                              }
+                              mysql_free_result($result);
+                            ?>
+                        </div>
+                      </div>
+                      <br><br>
 
-                      <table cellspacing="0" cellpadding="0">
-                        <?php
-                        echo "
-                        <tr>
-                          <td style='font-weight: bold'>Username</td>
-                          <td>$user</td>
-                        </tr>
-                        <tr>
-                          <td style='font-weight: bold'>Sex</td>
-                          <td>$Sex</td>
-                        </tr>
-                        <tr>
-                          <td style='font-weight: bold'>Email</td>
-                          <td>$email</td>
-                        </tr>
-                      <tr>
-                          <td style='font-weight: bold'>Password</td>
-                          <td>*</td>
-                        </tr>
-                      "
-                      ?>
-                      </table>
 
                   </div>
               </div>
@@ -144,6 +165,7 @@ $Sex = $profile[4];
       </div>
       <!-- /#page-content-wrapper -->
   </div>
+
   <!-- /#wrapper -->
   <!-- jQuery -->
   <!-- <script src="../Metube-G1/assets/js/jquery.min.js"></script> -->

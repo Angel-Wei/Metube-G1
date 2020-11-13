@@ -1,8 +1,5 @@
 <?php
 include_once "../function.php";
-// if(!$_SESSION["username"]){
-//   echo "<meta http-equiv=\"refresh\" content=\"0;url=../login_register/login.php\">";
-// }
 session_start();
 $user = $_SESSION['username'];
 $upper_user = strtoupper($user);
@@ -10,6 +7,7 @@ $query="SELECT accountid FROM account WHERE username = '$user'";
 $result = mysql_query( $query );
 $row = mysql_fetch_row($result);
 $accountid1 = $row[0];
+mysql_free_result($result);
 ?>
 
 
@@ -27,7 +25,7 @@ $accountid1 = $row[0];
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/simple-sidebar.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="../assets/css/style.css"> -->
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link href="../assets/css/contact_table.css" rel="stylesheet">
 
 </head>
@@ -88,11 +86,17 @@ $accountid1 = $row[0];
             <li>
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
             </li>
-            <li  class="active">
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Downloaded Media</a>
+            </li>
+            <li class="active">
                 <a href="contact.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
             </li>
             <li>
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Downloaded Media</a>
+              <a href="../message/message.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-envelope-square fa-stack-1x "></i></span>Message</a>
+            </li>
+            <li>
+              <a href="../discussion/disucssion.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-comments fa-stack-1x "></i></span>Discussion</a>
             </li>
             <li>
               <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Events</a>
@@ -179,7 +183,7 @@ $accountid1 = $row[0];
 
                                   if ($block_status == 0) {
                                     echo "
-                                      <td class='td5'><a href='#' onclick='block_user($accountid1,$accountid2)' style='color:#cc0000'>Block</a></td>
+                                      <td class='td5'><a href='#' onclick='block_user($accountid1,$accountid2)'>Block</a></td>
                                     </tr>
                                     ";
                                   }
@@ -198,7 +202,7 @@ $accountid1 = $row[0];
                         </div>
                         <br><br>
 
-                        <div class="wrap2" style="margin:0 auto;"> <!--margin:0 auto doesn't work here,but work on below <table>-->
+                        <div class="wrap2" style="margin:0 auto;"> 
                           <table class="head">
                             <caption style="font-size:16px;margin-bottom:5px;">Family List</caption>
                             <tr>
@@ -209,7 +213,6 @@ $accountid1 = $row[0];
                             </tr>
                           </table>
                           <div>
-                            <table >
                               <?php
                                 $query = "select * from contact WHERE accountid1='$accountid1' && type=1";
                                 $result = mysql_query( $query )
@@ -220,18 +223,19 @@ $accountid1 = $row[0];
                                   $row_contact = mysql_fetch_row($result_contact);
                                   $contact_type = "Family";
                                   echo "
+                                    <table>
                                     <tr>
                                       <td class='td1'> $row_contact[1] </td>
                                       <td class='td2'> $row_contact[3] </td>
                                       <td class='td3'> $row_contact[4] </td>
                                       <td class='td4'><a href='#' onclick='contact_remove(1,$accountid1,$accountid2)'> Remove </a></td>
                                     </tr>
+                                    </table>
                                     ";
-                                mysql_free_result($result_contact);
+                                  mysql_free_result($result_contact);
                                 }
-                                mysql_free_result($result);
+                              mysql_free_result($result);
                               ?>
-                            </table>
                           </div>
                         </div>
                         <br><br>
@@ -310,22 +314,6 @@ $accountid1 = $row[0];
                           </div>
                         </div>
                         <br><br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                   </div>
               </div>
