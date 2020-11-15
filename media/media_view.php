@@ -54,18 +54,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav pull-right mainNav">
                     <li><a href="../index.php">Home</a></li>
-                    <li class="active"><a href="media_view.php?id=<?php echo $mediaid;?>">View Media</a></li>
+                    <li class="active"><a href="media_view.php?id=<?php echo $_GET['id'];?>">View Media</a></li>
 										<?php
 										if (isset($_SESSION['username']) && isset($_SESSION['success'])) {
 											echo "
 											<li><a href='../account/profile.php'>".$_SESSION['username']."</a></li>
-											<li><a href='../browse.php'>Browse all</a></li>";
+											<li><a href='media_browse.php'>Browse all</a></li>";
 										}
 										else {
 											echo "
 												<li><a href='../login_register/login.php' style='border:1px;border-style:solid; border-radius: 25px; border-color:#9a496b;'   >Login</a></li>
 												<li><a href='../login_register/register.php'>Register</a></li>
-												<li><a href='../browse.php'>Browse all</a></li>
+												<li><a href='media_browse.php'>Browse all</a></li>
 												";
 										}
 										?>
@@ -167,6 +167,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							echo '<img src="../img/oops.jpg"'.' style="width: 50%; height: 50%; border:5px solid #8bcdcd; margin:10px; float:up"/>';
 						}
 					}
+					mysql_free_result($result);
 				}
 			?>
 		</div>
@@ -175,7 +176,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<p>Uploaded by: <?php echo $uploaded_by;?> | <?php echo $viewcount;?> views</p>
 		</div>
 		<!--add icons for download, playlist, favorite purpose-->
-    <a href="#" style="margin-left: 1000px;"><img src="../img/download_icon.png" style="width: 45px; margin:3px; float:bottom"/></a>
+    <a href="media_download_process.php?id=<?php echo $_GET['id'];?>" style="margin-left: 1000px;"><img src="../img/download_icon.png" style="width: 45px; margin:3px; float:bottom"/></a>
     <a href="#"><img src="../img/playlist_icon.png" href="#" style="width: 40px; margin:3px; float:bottom"/></a>
     <a href="#"><img src="../img/favorite_icon.png" href="#" style="width: 45px; margin:3px; float:bottom"/></a>
 
