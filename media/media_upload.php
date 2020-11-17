@@ -83,7 +83,7 @@ $Sex = $profile[4];
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
             </li>
             <li>
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Downloaded Media</a>
+              <a href="view_downloaded.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Downloaded Media</a>
             </li>
             <li>
                 <a href="../contact/contact.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
@@ -149,7 +149,6 @@ $Sex = $profile[4];
                           <option value="Video: movie">movie</option>
                           <option value="Video: other">other</option>
                         </optgroup>
-                        <option value="Other" selected>Other</option>
                       </select><br>
 
                       <!--Create a drop down list to list options for privacy-->

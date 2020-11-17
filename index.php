@@ -18,7 +18,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-theme.css" media="screen">
 	<link rel="stylesheet" href="assets/css/style.css">
-    <link rel='stylesheet' id='camera-css'  href='assets/css/camera.css' type='text/css' media='all'>
+  <link rel='stylesheet' id='camera-css'  href='assets/css/camera.css' type='text/css' media='all'>
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
 	<script src="assets/js/html5shiv.js"></script>
@@ -71,15 +71,29 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<li><a href='login_register/logout.php'>Log out</a></li>
 							</ul>
 						</li>
-						<li><a href='browse.php'>Browse all</a></li>
-
-						";
+						<li class='dropdown'>
+							<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Browse<b class='caret'></b></a>
+							<ul class='dropdown-menu'>
+								<li><a href='media/media_browse.php'>Browse All</a></li>
+								<li><a href='media/category.php?category=Image'>Browse Image</a></li>
+								<li><a href='media/category.php?category=Audio'>Browse Audio</a></li>
+								<li><a href='media/category.php?category=Video'>Browse Video</a></li>
+							</ul>
+						</li>";
 					}
 					else {
 						echo "
 							<li><a href='login_register/login.php' style='border:1px;border-style:solid; border-radius: 25px; border-color:#9a496b;'   >Login</a></li>
 							<li><a href='login_register/register.php'>Register</a></li>
-							<li><a href='browse.php'>Browse all</a></li>
+							<li class='dropdown'>
+								<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Browse<b class='caret'></b></a>
+								<ul class='dropdown-menu'>
+									<li><a href='media/media_browse.php'>Browse All</a></li>
+									<li><a href='media/category.php?category=Image'>Browse Image</a></li>
+									<li><a href='media/category.php?category=Audio'>Browse Audio</a></li>
+									<li><a href='media/category.php?category=Video'>Browse Video</a></li>
+								</ul>
+							</li>
 							";
 					}
 					?>
