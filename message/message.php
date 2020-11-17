@@ -91,7 +91,7 @@ mysql_free_result($result);
               <a href="../message/message.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-envelope-square fa-stack-1x "></i></span>Message</a>
             </li>
             <li>
-              <a href="../discussion/disucssion.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-comments fa-stack-1x "></i></span>Discussion</a>
+              <a href="../discussion/discussion.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-comments fa-stack-1x "></i></span>Discussion</a>
             </li>
             <li>
               <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Events</a>
@@ -127,7 +127,7 @@ mysql_free_result($result);
                         </table>
                         <div>
                             <?php
-                              $query = "select * from message WHERE from_id='$accountid1' or to_id='$accountid1'";
+                              $query = "select * from message WHERE from_id='$accountid1' or to_id='$accountid1' order by message_time DESC";
                               $result = mysql_query( $query );
                               while($row = mysql_fetch_row($result)) {
                                 $msg_id = $row[0];
