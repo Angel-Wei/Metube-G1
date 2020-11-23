@@ -153,3 +153,53 @@ CREATE TABLE IF NOT EXISTS `message` (
   `message_time` varchar(64),
   PRIMARY KEY (`messageid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Table structure for table `playlist`
+--
+
+CREATE TABLE IF NOT EXISTS `playlist` (
+  `playlistid` int(11) NOT NULL AUTO_INCREMENT,
+  `accountid` int(11) NOT NULL,
+  `listname` varchar(64) NOT NULL,
+  `listdescription` varchar(240),
+  PRIMARY KEY (`playlistid`),
+  FOREIGN KEY (accountid) REFERENCES account(accountid)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+
+-- Table structure for table `playlistmedia` (child table of playlist)
+--
+
+CREATE TABLE IF NOT EXISTS `playlistmedia` (
+  `playmediaid` int(11) NOT NULL AUTO_INCREMENT,
+  `playlistid` int(11) NOT NULL,
+  `mediaid` int(11) NOT NULL,
+  PRIMARY KEY (`playmediaid`),
+  FOREIGN KEY (playlistid) REFERENCES playlist(playlistid),
+  FOREIGN KEY (mediaid) REFERENCES media(mediaid)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+
+--
+-- Table structure for table `favoritelist`
+--
+
+CREATE TABLE IF NOT EXISTS `favoritelist` (
+  `favoritelistid` int(11) NOT NULL AUTO_INCREMENT,
+  `accountid` int(11) NOT NULL,
+  `listname` varchar(64) NOT NULL,
+  `listdescription` varchar(240),
+  PRIMARY KEY (`favoritelistid`),
+  FOREIGN KEY (accountid) REFERENCES account(accountid)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+
+-- Table structure for table `playlistmedia` (child table of favoritelist)
+--
+
+CREATE TABLE IF NOT EXISTS `favoritelistmedia` (
+  `favoritemediaid` int(11) NOT NULL AUTO_INCREMENT,
+  `favoritelistid` int(11) NOT NULL,
+  `mediaid` int(11) NOT NULL,
+  PRIMARY KEY (`favoritemediaid`),
+  FOREIGN KEY (favoritelistid) REFERENCES favoritelist(favoritelistid),
+  FOREIGN KEY (mediaid) REFERENCES media(mediaid)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;

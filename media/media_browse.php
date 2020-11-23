@@ -120,15 +120,36 @@ a{
     if (isset($_SESSION['username']))
     {
       echo "<p class = 'center'>Welcome ".$_SESSION['username']."!</p>";
+			echo "<a class='center' href='media_upload.php' style='color:#07689f;'>Upload File &nbsp;</a>";
+			echo "<div class='dropdown'>";
     }
     else
     {
       echo "<p class='center'>Welcome to the MeTube! <a href='../login_register/register.php' style='color:#07689f;'>Want to be a user? Register here!</a></p>";
+			echo "<div style='margin-left:150px;' class='dropdown'>";
     }
   ?>
-  <a class="center" href='media_upload.php' style="color:#07689f;">Upload File</a></br></br>
+	<button class='dropbtn' style="color:#706897; background-color:#ebcfc4; border-radius:30px">Sort by</button>
+	<div class='dropdown-content'>
+	<a href='media_browse.php?order=Name'>Title</a>
+	<a href='media_browse.php?order=Viewcount'>Mostly Viewd</a>
+	<a href='media_browse.php?order=Uploadtime'>Most Recently Uploaded</a>
+	</div>
+	</div>
+
+	</br></br>
   <?php
-  	$query = "SELECT * from media";
+		// the query changes when the ordering method is specified
+		if(!isset($_GET['order']))
+		{
+			$query = "SELECT * from media";
+		}
+		else
+		{
+			if($_GET['order']=="Name") $query = "SELECT * from media order by title";
+			else if($_GET['order']=="Viewcount") $query = "SELECT * from media order by viewcount DESC";
+			else if($_GET['order']=="Uploadtime") $query = "SELECT * from media order by upload_data_time DESC";
+		}
   	$result = mysql_query($query);
   	if (!$result)
   	{
@@ -136,10 +157,12 @@ a{
   	}
   ?>
   <div style="margin-left:150px;background:#fddb3a;color:#41444b; width:80%;">Uploaded Media</div>
-  <table class="center" style="margin-left:150px;" width="50%" cellpadding="0" cellspacing="0">
+  <table class="center" style="margin-left:150px;" width="80%" cellpadding="0" cellspacing="0">
     <tr valign="middle">
       <td>Title</td>
-      <td colspan="2">Uploaded by</td>
+      <td>Uploaded by</td>
+			<td>Upload time</td>
+			<td colspan="2">Views</td>
     </tr>
 		<?php
 			while ($result_row = mysql_fetch_row($result))
@@ -152,6 +175,16 @@ a{
         <td>
 					<?php
 						echo $result_row[1];
+					?>
+        </td>
+				<td>
+					<?php
+						echo $result_row[11];
+					?>
+        </td>
+				<td>
+					<?php
+						echo $result_row[14];
 					?>
         </td>
         <td>

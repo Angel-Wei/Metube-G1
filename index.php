@@ -301,11 +301,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="social text-center">
 				<h4><b>CPSC 6620 - G1</h4>
 				<h5>Group Member: Anqi Wei, Xiaohong Zhang</h5>
-				<a href="#"><i class="fa fa-twitter"></i></a>
-				<a href="#"><i class="fa fa-facebook"></i></a>
-				<a href="#"><i class="fa fa-dribbble"></i></a>
-				<a href="#"><i class="fa fa-flickr"></i></a>
-				<a href="#"><i class="fa fa-github"></i></a>
 			</div>
 
 			<div class="clear"></div>
@@ -313,30 +308,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 		<div class="footer2">
 			<div class="container">
-				<div class="row">
-
-					<div class="col-md-6 panel">
-						<div class="panel-body">
-							<p class="simplenav">
-								<a href="index.html">Home</a> |
-								<a href="about.html">About</a> |
-								<a href="services.html">Services</a> |
-								<a href="price.html">Price</a> |
-								<a href="projects.html">Projects</a> |
-								<a href="contact.html">Contact</a>
-							</p>
-						</div>
-					</div>
-
-					<div class="col-md-6 panel">
-						<div class="panel-body">
-							<p class="text-right">
-								Copyright &copy; 2015. Template by <a href="http://webthemez.com/" rel="develop">WebThemez.com</a>
-							</p>
-						</div>
-					</div>
-
-				</div>
+				<div class="row"></div>
 				<!-- /row of panels -->
 			</div>
 		</div>

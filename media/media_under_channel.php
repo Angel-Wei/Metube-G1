@@ -43,7 +43,6 @@ div.desc {
 figure {
     margin: 0;
 }
-
 </style>
 <script type="text/javascript">
 </script>
@@ -101,11 +100,25 @@ $Sex = $profile[4];
               <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                 <li class="active"><a href="media_under_channel.php">Your Media</a></li>
                 <li><a href="media_upload.php">Upload New Media</a></li>
-                <li><a href="#">Playlists</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span>Playlist</a>
+              <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                <!-- Button for showing all playlists -->
+                <li><a href="../playlist/view_playlist.php">Your Playlists</a></li>
+                <!-- Button to create a new playlist -->
+                <li><a href="../playlist/create_playlist.php">Create New Playlist</a></li>
               </ul>
             </li>
             <li>
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
+              <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                <!-- Button for showing all favorite list -->
+                <li><a href="../favoritelist/view_favoritelist.php">Your Favorite Lists</a></li>
+                <!-- Button to create a new favorite list -->
+                <li><a href="../favoritelist/create_favoritelist.php">Create New Favorite List</a></li>
+              </ul>
             </li>
             <li>
               <a href="view_downloaded.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Downloaded Media</a>
@@ -233,6 +246,5 @@ $Sex = $profile[4];
   <script src="https://code.jquery.com/jquery-1.12.2.js"   integrity="sha256-VUCyr0ZXB5VhBibo2DkTVhdspjmxUgxDGaLQx7qb7xY="   crossorigin="anonymous"></script>
   <script src="../assets/js/bootstrap.min.js"></script>
   <script src="../assets/js/sidebar_menu.js"></script>
-</body>
 </body>
 </html>

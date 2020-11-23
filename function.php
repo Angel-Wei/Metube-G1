@@ -35,7 +35,7 @@ function block_or_not($current_user, $uploaded_by)
 	$id2_row = mysql_fetch_row($id2_result);
 	$id2 = $id2_row[0];
 
-	$query = "select * from contact where accountid1='$id1' and accountid2='$id2'";
+	$query = "select * from contact where accountid1='$id2' and accountid2='$id1'";
 	$result = mysql_query($query)
 	   or die ("block_or_not() failed. Could not query the database: <br />". mysql_error());
 	$count = mysql_num_rows($result);
@@ -222,7 +222,7 @@ function contact_or_not($current_user, $uploaded_by)
 	$id2_row = mysql_fetch_row($id2_result);
 	$id2 = $id2_row[0];
 
-	$query = "select * from contact where accountid1='$id1' and accountid2='$id2'";
+	$query = "select * from contact where accountid1='$id2' and accountid2='$id1'";
 	$result = mysql_query($query)
 	   or die ("block_or_not() failed. Could not query the database: <br />". mysql_error());
 	$count = mysql_num_rows($result);
