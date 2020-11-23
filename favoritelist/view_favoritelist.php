@@ -79,20 +79,20 @@ $accountid = $profile[0];
                 <li><a href="../media/media_upload.php">Upload New Media</a></li>
               </ul>
             </li>
-            <li class="active">
+            <li>
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span>Playlist</a>
               <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                 <!-- Button for showing all playlists -->
-                <li class="active"><a href="../playlist/view_playlist.php">Your Playlist</a></li>
+                <li><a href="../playlist/view_playlist.php">Your Playlist</a></li>
                 <!-- Button to create a new playlist -->
                 <li><a href="../playlist/create_playlist.php">Create New Playlist</a></li>
               </ul>
             </li>
-            <li>
+            <li class="active">
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
               <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                 <!-- Button for showing all favorite list -->
-                <li><a href="../favoritelist/view_favoritelist.php">Your Favorite Lists</a></li>
+                <li class="active"><a href="../favoritelist/view_favoritelist.php">Your Favorite Lists</a></li>
                 <!-- Button to create a new favorite list -->
                 <li><a href="../favoritelist/create_favoritelist.php">Create New Favorite List</a></li>
               </ul>
