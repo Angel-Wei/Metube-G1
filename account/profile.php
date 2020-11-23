@@ -66,18 +66,31 @@ $Sex = $profile[4];
               <a href="profile.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Profile </a>
             </li>
             <li>
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span> Channel</a>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span>Channel</a>
               <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                 <!-- Button for showing all uploaded media -->
                 <li><a href="../media/media_under_channel.php">Your Media</a></li>
                 <!-- Button for upload new media -->
                 <li><a href="../media/media_upload.php">Upload New Media</a></li>
-                <!-- Button for Playlists -->
-                <li><a href="#">Playlists</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span>Playlist</a>
+              <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                <!-- Button for showing all playlists -->
+                <li><a href="../playlist/view_playlist.php">Your Playlists</a></li>
+                <!-- Button to create a new playlist -->
+                <li><a href="../playlist/create_playlist.php">Create New Playlist</a></li>
               </ul>
             </li>
             <li>
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
+              <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                <!-- Button for showing all favorite list -->
+                <li><a href="../favoritelist/view_favoritelist.php">Your Favorite Lists</a></li>
+                <!-- Button to create a new favorite list -->
+                <li><a href="../favoritelist/create_favoritelist.php">Create New Favorite List</a></li>
+              </ul>
             </li>
             <li>
               <a href="../media/view_downloaded.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Downloaded Media</a>

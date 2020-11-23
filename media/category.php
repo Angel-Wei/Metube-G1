@@ -122,9 +122,9 @@ td:last-child {
 										<button class='dropbtn'>BROWSE</button>
 										<div class='dropdown-content'>
                     <a href='media_browse.php'>Browse All</a>
-										<a href='category.php?category=Image'>Browse Image</a>
-										<a href='category.php?category=Audio'>Browse Audio</a>
-										<a href='category.php?category=Video'>Browse Video</a>
+										<a href='category.php?category=Image&order=default'>Browse Image</a>
+										<a href='category.php?category=Audio&order=default'>Browse Audio</a>
+										<a href='category.php?category=Video&order=default'>Browse Video</a>
 										</div>
 										</div>";
                   }
@@ -136,9 +136,9 @@ td:last-child {
 											<button class='dropbtn'>BROWSE</button>
 											<div class='dropdown-content'>
                       <a href='media_browse.php'>Browse All</a>
-											<a href='category.php?category=Image'>Browse Image</a>
-											<a href='category.php?category=Audio'>Browse Audio</a>
-											<a href='category.php?category=Video'>Browse Video</a>
+											<a href='category.php?category=Image&order=default'>Browse Image</a>
+											<a href='category.php?category=Audio&order=default'>Browse Audio</a>
+											<a href='category.php?category=Video&order=default'>Browse Video</a>
 											</div>
 											</div>
                       ";
@@ -155,20 +155,33 @@ td:last-child {
     if (isset($_SESSION['username']))
     {
       echo "<p class = 'center'>Welcome ".$_SESSION['username']."!</p>";
+			echo "<a class='center' href='media_upload.php' style='color:#07689f;'>Upload File &nbsp;</a>";
+			echo "<div class='dropdown'>";
     }
     else
     {
       echo "<p class='center'>Welcome to the MeTube! <a href='../login_register/register.php' style='color:#07689f;'>Want to be a user? Register here!</a></p>";
+			echo "<div style='margin-left:150px;' class='dropdown'>";
     }
   ?>
-  <a class="center" href='media_upload.php' style="color:#07689f;">Upload File</a></br>
+	<button class='dropbtn' style="color:#706897; background-color:#ebcfc4; border-radius:30px">Sort by</button>
+	<div class='dropdown-content'>
+	<a href='category.php?category=<?php echo $_GET['category'];?>&order=Name'>Title</a>
+	<a href='category.php?category=<?php echo $_GET['category'];?>&order=Viewcount'>Mostly Viewd</a>
+	<a href='category.php?category=<?php echo $_GET['category'];?>&order=Uploadtime'>Most Recently Uploaded</a>
+	</div>
+	</div></br>
   <h4 style="padding-left:600px;">Click to view detailed information.</h4>
 
   <?php
   if(isset($_GET['category']))
   {
+		// sort the media by different ways;
     $category = $_GET['category'];
-    $query = "SELECT * FROM media WHERE category REGEXP '^$category' order by viewcount DESC";
+		$query = "SELECT * FROM media WHERE category REGEXP '^$category'"; // defalut order
+		if(isset($_GET['order']) and $_GET['order']=="Name") $query = "SELECT * FROM media WHERE category REGEXP '^$category' order by title";
+		else if(isset($_GET['order']) and $_GET['order']=="Viewcount") $query = "SELECT * FROM media WHERE category REGEXP '^$category' order by viewcount DESC";
+		else if(isset($_GET['order']) and $_GET['order']=="Uploadtime") $query = "SELECT * FROM media WHERE category REGEXP '^$category' order by upload_data_time DESC";
     $result = mysql_query($query)
     or die ("Browse by category failed. Could not query the database: <br/>". mysql_error());
   ?>
@@ -238,6 +251,7 @@ td:last-child {
       }
     }
     echo "</table>";
+		mysql_free_result($result);
   }
   else echo "<script type='text/javascript'>alert('Browse by category failed.');
   window.location='media_browse.php';</script>";

@@ -124,7 +124,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					}
 
 					// if the media is private
-					else if($access="Private")
+					else if($access=="Private")
 					{
 						if(isset($_SESSION['username']) and $_SESSION['username']==$uploaded_by)
 						{
@@ -145,9 +145,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						if (isset($_SESSION['username'])){
 							$current_user = $_SESSION['username'];
 							$verify = contact_or_not($current_user, $uploaded_by);
-
+							// if two users are the same
+							if($current_user==$uploaded_by)
+							{
+								play_media($title, $filepath, $description, $type);
+								updateViewCount($mediaid, $viewcount);
+							}
 							// if two users are contacts and the current user is not blocked
-							if (($verify==1 or $uploaded_by==$current_user) and block_or_not($current_user, $uploaded_by)==0)
+							else if ($verify==1 and block_or_not($current_user, $uploaded_by)==0)
 							{
 								play_media($title, $filepath, $description, $type);
 								updateViewCount($mediaid, $viewcount);
@@ -176,12 +181,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<p>Uploaded by: <?php echo $uploaded_by;?> | <?php echo $viewcount;?> views</p>
 		</div>
 		<!--add icons for download, playlist, favorite purpose-->
-    <a href="media_download_process.php?id=<?php echo $_GET['id'];?>" style="margin-left: 1000px;"><img src="../img/download_icon.png" style="width: 45px; margin:3px; float:bottom"/></a>
-    <a href="#"><img src="../img/playlist_icon.png" href="#" style="width: 40px; margin:3px; float:bottom"/></a>
-    <a href="#"><img src="../img/favorite_icon.png" href="#" style="width: 45px; margin:3px; float:bottom"/></a>
+    <a href="media_download_process.php?id=<?php echo $_GET['id'];?>" style="margin-left: 1000px;">
+			<img src="../img/download_icon.png" title="Click to download" style="width: 45px; margin:3px; float:bottom"/></a>
+    <a href="../playlist/add_to_playlist.php?id=<?php echo $_GET['id'];?>">
+			<img src="../img/playlist_icon.png" title="Add to your playlist" style="width: 40px; margin:3px; float:bottom"/></a>
+    <a href="../favoritelist/add_to_favoritelist.php?id=<?php echo $_GET['id'];?>">
+			<img src="../img/favorite_icon.png" title="Add to your favorte list" style="width: 45px; margin:3px; float:bottom"/></a>
 
 		<div class="center" style="border-style:none; text-align: left;"> <!--Recommendations-->
 			<h3>Recommendations: </h3>
+			<iframe src="media_recommendation.php?id=<?php echo $_GET['id'];?>" style="border:none"
+				sandbox="allow-top-navigation"
+        onload="this.style.height=(this.contentWindow.document.body.scrollHeight+20)+'px';"
+				width=100% height=auto name="recommendation"></iframe>
 		</div>
 		<hr style="width:80%; border-top: 3px solid #ccc;">
 		<div class="center" style="border-style:none; text-align: left; vertical-align: top; line-height: 10px;"> <!--Comment and scoring session-->
