@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once "../function.php";
 $playlistid = $_GET['playlistid'];
 $mediaid = $_GET['mediaid'];

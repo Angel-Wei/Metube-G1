@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once "../function.php";
 $favoritelistid = $_GET['favoritelistid'];
 $mediaid = $_GET['mediaid'];

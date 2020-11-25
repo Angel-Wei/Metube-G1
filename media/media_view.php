@@ -78,7 +78,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<hr style="width:80%; border-top: 3px solid #ccc;">
 		<div class="center"> <!--Check the privacy settings of the media, view, and comment-->
 			<?php
-				if(isset($_GET['id'])){
+				if(isset($_GET['id']))
+				{
 					$mediaid=$_GET['id'];
 					$query = "SELECT * FROM media WHERE mediaid='".$_GET['id']."'";
 					$result = mysql_query( $query );
@@ -171,6 +172,32 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							echo '<h4>Sorry, you are not a registered user in Metube. However, the media is only accessed by friend users.</h4>';
 							echo '<img src="../img/oops.jpg"'.' style="width: 50%; height: 50%; border:5px solid #8bcdcd; margin:10px; float:up"/>';
 						}
+					}
+					// only when current user is the one who uploads the media, the sharing mode and comment permissions will be shown
+					if($_SESSION['username']==$uploaded_by)
+					{
+?>
+						<h5 style="line-height:20px;">Current Sharing Mode: <b><?php echo $access;?></b>
+							<form method="post" action="change_sharing_mode.php?id=<?php echo $_GET['id'];?>" target="_self" enctype="multipart/form-data">
+								<select name="modeoptions">
+									<option value="Public">Public</option>
+									<option value="Friend">Friend</option>
+									<option value="Private">Private</option>
+								</select>
+								<input style="width:160px;" name="submit" class="signupbtn" type="submit" value="Change Sharing Mode">
+							</form>
+						</h5>
+						<h5 style="line-height:20px;">Current Comment & Rate Permission: <b><?php echo $comment_permit;?></b>
+							<form method="post" action="change_comment_permission.php?id=<?php echo $_GET['id'];?>" target="_self" enctype="multipart/form-data">
+								<select name="commentoptions">
+									<option value="Public">Public</option>
+									<option value="Friend">Friend</option>
+									<option value="Private">Private</option>
+								</select>
+								<input style="width:250px;" name="submit" class="signupbtn" type="submit" value="Change Comment & Rate Permission">
+							</form>
+						</h5>
+      <?php
 					}
 					mysql_free_result($result);
 				}
