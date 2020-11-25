@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once "../function.php";
 $favoritelistid = $_GET['listid'];
 // use inner join to delete playlist records from two tables
