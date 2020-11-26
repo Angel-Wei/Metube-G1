@@ -31,7 +31,7 @@ if(isset($_POST['submit'])){
 
 	// check if all the blanks are filled in
   if (empty($title)||empty($description)||empty($keyword)){
-		echo "<script type='text/javascript'>alert('Please provied the title, description, and keyword information.');
+		echo "<script type='text/javascript'>alert('Please provide the title, description, and keyword information.');
 		window.location='../media/media_upload.php';</script>";
 	}
 

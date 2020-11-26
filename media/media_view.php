@@ -78,7 +78,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<hr style="width:80%; border-top: 3px solid #ccc;">
 		<div class="center"> <!--Check the privacy settings of the media, view, and comment-->
 			<?php
-				if(isset($_GET['id'])){
+				if(isset($_GET['id']))
+				{
 					$mediaid=$_GET['id'];
 					$query = "SELECT * FROM media WHERE mediaid='".$_GET['id']."'";
 					$result = mysql_query( $query );
@@ -124,7 +125,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					}
 
 					// if the media is private
-					else if($access="Private")
+					else if($access=="Private")
 					{
 						if(isset($_SESSION['username']) and $_SESSION['username']==$uploaded_by)
 						{
@@ -145,9 +146,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						if (isset($_SESSION['username'])){
 							$current_user = $_SESSION['username'];
 							$verify = contact_or_not($current_user, $uploaded_by);
-
+							// if two users are the same
+							if($current_user==$uploaded_by)
+							{
+								play_media($title, $filepath, $description, $type);
+								updateViewCount($mediaid, $viewcount);
+							}
 							// if two users are contacts and the current user is not blocked
-							if (($verify==1 or $uploaded_by==$current_user) and block_or_not($current_user, $uploaded_by)==0)
+							else if ($verify==1 and block_or_not($current_user, $uploaded_by)==0)
 							{
 								play_media($title, $filepath, $description, $type);
 								updateViewCount($mediaid, $viewcount);
@@ -167,6 +173,32 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							echo '<img src="../img/oops.jpg"'.' style="width: 50%; height: 50%; border:5px solid #8bcdcd; margin:10px; float:up"/>';
 						}
 					}
+					// only when current user is the one who uploads the media, the sharing mode and comment permissions will be shown
+					if($_SESSION['username']==$uploaded_by)
+					{
+?>
+						<h5 style="line-height:20px;">Current Sharing Mode: <b><?php echo $access;?></b>
+							<form method="post" action="change_sharing_mode.php?id=<?php echo $_GET['id'];?>" target="_self" enctype="multipart/form-data">
+								<select name="modeoptions">
+									<option value="Public">Public</option>
+									<option value="Friend">Friend</option>
+									<option value="Private">Private</option>
+								</select>
+								<input style="width:160px;" name="submit" class="signupbtn" type="submit" value="Change Sharing Mode">
+							</form>
+						</h5>
+						<h5 style="line-height:20px;">Current Comment & Rate Permission: <b><?php echo $comment_permit;?></b>
+							<form method="post" action="change_comment_permission.php?id=<?php echo $_GET['id'];?>" target="_self" enctype="multipart/form-data">
+								<select name="commentoptions">
+									<option value="Public">Public</option>
+									<option value="Friend">Friend</option>
+									<option value="Private">Private</option>
+								</select>
+								<input style="width:250px;" name="submit" class="signupbtn" type="submit" value="Change Comment & Rate Permission">
+							</form>
+						</h5>
+      <?php
+					}
 					mysql_free_result($result);
 				}
 			?>
@@ -176,12 +208,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<p>Uploaded by: <?php echo $uploaded_by;?> | <?php echo $viewcount;?> views</p>
 		</div>
 		<!--add icons for download, playlist, favorite purpose-->
-    <a href="media_download_process.php?id=<?php echo $_GET['id'];?>" style="margin-left: 1000px;"><img src="../img/download_icon.png" style="width: 45px; margin:3px; float:bottom"/></a>
-    <a href="#"><img src="../img/playlist_icon.png" href="#" style="width: 40px; margin:3px; float:bottom"/></a>
-    <a href="#"><img src="../img/favorite_icon.png" href="#" style="width: 45px; margin:3px; float:bottom"/></a>
+    <a href="media_download_process.php?id=<?php echo $_GET['id'];?>" style="margin-left: 1000px;">
+			<img src="../img/download_icon.png" title="Click to download" style="width: 45px; margin:3px; float:bottom"/></a>
+    <a href="../playlist/add_to_playlist.php?id=<?php echo $_GET['id'];?>">
+			<img src="../img/playlist_icon.png" title="Add to your playlist" style="width: 40px; margin:3px; float:bottom"/></a>
+    <a href="../favoritelist/add_to_favoritelist.php?id=<?php echo $_GET['id'];?>">
+			<img src="../img/favorite_icon.png" title="Add to your favorte list" style="width: 45px; margin:3px; float:bottom"/></a>
 
 		<div class="center" style="border-style:none; text-align: left;"> <!--Recommendations-->
 			<h3>Recommendations: </h3>
+			<iframe src="media_recommendation.php?id=<?php echo $_GET['id'];?>" style="border:none"
+				sandbox="allow-top-navigation"
+        onload="this.style.height=(this.contentWindow.document.body.scrollHeight+20)+'px';"
+				width=100% height=auto name="recommendation"></iframe>
 		</div>
 		<hr style="width:80%; border-top: 3px solid #ccc;">
 		<div class="center" style="border-style:none; text-align: left; vertical-align: top; line-height: 10px;"> <!--Comment and scoring session-->

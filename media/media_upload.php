@@ -75,12 +75,25 @@ $Sex = $profile[4];
                 <li><a href="media_under_channel.php">Your Media</a></li>
                 <!-- Button for upload new media -->
                 <li class="active"><a href="media_upload.php">Upload New Media</a></li>
-                <!-- Button for Playlists -->
-                <li><a href="#">Playlists</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span>Playlist</a>
+              <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                <!-- Button for showing all playlists -->
+                <li><a href="../playlist/view_playlist.php">Your Playlists</a></li>
+                <!-- Button to create a new playlist-->
+                <li><a href="../playlist/create_playlist.php">Create New Playlist</a></li>
               </ul>
             </li>
             <li>
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
+              <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                <!-- Button for showing all favorite lists -->
+                <li><a href="../favoritelist/view_favoritelist.php">Your Favorite Lists</a></li>
+                <!-- Button to create a new favorite list -->
+                <li><a href="../favoritelist/create_favoritelist.php">Create New Favorite List</a></li>
+              </ul>
             </li>
             <li>
               <a href="view_downloaded.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Downloaded Media</a>
@@ -170,7 +183,6 @@ $Sex = $profile[4];
                       <input style="width:100px;" name="reset" class="resetbtn" type="reset" value="Reset">
                       <input style="width:100px;" name="submit" class="signupbtn" type="submit" value="Submit">
                     </form>
-
                   </div>
               </div>
           </div>
