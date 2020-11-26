@@ -174,7 +174,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						}
 					}
 					// only when current user is the one who uploads the media, the sharing mode and comment permissions will be shown
-					if($_SESSION['username']==$uploaded_by)
+					if(isset($_SESSION['username']) and $_SESSION['username']==$uploaded_by)
 					{
 ?>
 						<h5 style="line-height:20px;">Current Sharing Mode: <b><?php echo $access;?></b>
