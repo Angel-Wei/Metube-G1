@@ -1,8 +1,11 @@
 <?php
 include "media_upload_process.php";
 if(!$_SESSION["username"]){
-  echo "<meta http-equiv=\"refresh\" content=\"0;url=../login_register/login.php\">";
+  header("Location: ../login_register/login.php");
+  exit();
 }
+$user = $_SESSION['username'];
+$upper_user = strtoupper($user);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,14 +23,7 @@ if(!$_SESSION["username"]){
     <link rel="stylesheet" type="text/css" href="css/default.css" />
 
 </head>
-<?php
-$user = $_SESSION['username'];
-$upper_user = strtoupper($user);
-$profile = get_user_profile($user);
-$password = $profile[2];
-$email = $profile[3];
-$Sex = $profile[4];
-?>
+
 
 <body>
   <nav class="navbar navbar-default no-margin">
@@ -42,8 +38,12 @@ $Sex = $profile[4];
                     </button>
                   "
                   ?>
-                  <a class="navbar-brand" href="../index.php"> <img src="../assets/images/logo.png" style="margin:-15px 10px 40px 0px"  width="190" alt="MeTube"></a>
-                  <input type="text" style="margin-top:10px;margin-left:30px" size="25" placeholder="Search..">
+                  <form name='search_form' method='GET' action='../search/search.php'
+                        onsubmit='return validateForm()' enctype='multipart/form-data'>
+                  <a class="navbar-brand" href="../index.php"><img src="../assets/images/logo.png" style="margin:-15px 10px 40px 0px"  width="190" alt="MeTube"></a>
+                  <input name='search' type='text' style="margin-top:15px;margin-left:30px" size="20" placeholder="Search.."></input>
+                  <button type="submit" name="submit"><i class="fa fa-search"></i> </button>
+                  </form>
 
               </div><!-- navbar-header-->
 
@@ -65,6 +65,9 @@ $Sex = $profile[4];
       <div id="sidebar-wrapper">
 
         <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+          <li>
+            <a href="../index.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-home fa-stack-1x "></i></span>Home </a>
+          </li>
             <li >
               <a href="../account/profile.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Profile </a>
             </li>
@@ -78,7 +81,7 @@ $Sex = $profile[4];
               </ul>
             </li>
             <li>
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span>Playlist</a>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-music fa-stack-1x "></i></span>Playlist</a>
               <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                 <!-- Button for showing all playlists -->
                 <li><a href="../playlist/view_playlist.php">Your Playlists</a></li>
@@ -106,15 +109,6 @@ $Sex = $profile[4];
             </li>
             <li>
               <a href="../discussion/discussion.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-comments fa-stack-1x "></i></span>Discussion</a>
-            </li>
-            <li>
-              <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Events</a>
-            </li>
-            <li>
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-youtube-play fa-stack-1x "></i></span>About</a>
-            </li>
-            <li>
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
             </li>
             <li>
               <a href="../login_register/logout.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Logout</a>

@@ -1,6 +1,10 @@
 <?php
 session_start();
 include_once "../function.php";
+if(!$_SESSION["username"]){
+  header("Location: ../login_register/login.php");
+  exit();
+}
 if($_GET['id'])
 {
   $mediaid = $_GET['id'];

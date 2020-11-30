@@ -1,6 +1,10 @@
 <?php
 include_once "../function.php";
 session_start();
+if(!$_SESSION["username"]){
+  header("Location: ../login_register/login.php");
+  exit();
+}
 $user = $_SESSION['username'];
 $upper_user = strtoupper($user);
 $query="SELECT accountid FROM account WHERE username = '$user'";
@@ -18,7 +22,7 @@ $msg_id = $_GET['msg_id']; //from message.php, $_POST doesn't work
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Profile Page</title>
+    <title>Message</title>
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/simple-sidebar.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
@@ -30,7 +34,6 @@ $msg_id = $_GET['msg_id']; //from message.php, $_POST doesn't work
       width: 630px;
       border: 1px groove #ddd !important;
       padding: 0 1em 1em 1em !important;
-      /* margin: 0 0 1.5em 0 !important; */
       -webkit-box-shadow:  0px 0px 0px 0px #000;
             box-shadow:  0px 0px 0px 0px #000;
       margin: 0 auto;
@@ -38,7 +41,6 @@ $msg_id = $_GET['msg_id']; //from message.php, $_POST doesn't work
 
     legend.scheduler-border {
       font-size: 1.0em !important;
-      /* font-weight: bold !important; */
       text-align: left !important;
       width:auto;
       padding:0 10px;
@@ -78,9 +80,12 @@ $msg_id = $_GET['msg_id']; //from message.php, $_POST doesn't work
                     </button>
                   "
                   ?>
-                  <a class="navbar-brand" href="../index.php"> <img src="../assets/images/logo.png" style="margin:-15px 10px 40px 0px"  width="190" alt="MeTube"></a>
-                  <input type="text" style="margin-top:10px;margin-left:30px" size="25" placeholder="Search..">
-
+                  <form name='search_form' method='GET' action='../search/search.php'
+                        onsubmit='return validateForm()' enctype='multipart/form-data'>
+                  <a class="navbar-brand" href="../index.php"><img src="../assets/images/logo.png" style="margin:-15px 10px 40px 0px"  width="190" alt="MeTube"></a>
+                  <input name='search' type='text' style="margin-top:15px;margin-left:30px" size="20" placeholder="Search.."></input>
+                  <button type="submit" name="submit"><i class="fa fa-search"></i> </button>
+                  </form>
               </div><!-- navbar-header-->
 
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -101,6 +106,9 @@ $msg_id = $_GET['msg_id']; //from message.php, $_POST doesn't work
       <div id="sidebar-wrapper">
 
         <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+          <li>
+            <a href="../index.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-home fa-stack-1x "></i></span>Home </a>
+          </li>
             <li>
               <a href="../account/profile.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Profile </a>
             </li>
@@ -111,15 +119,28 @@ $msg_id = $_GET['msg_id']; //from message.php, $_POST doesn't work
                 <li><a href="../media/media_under_channel.php">Your Media</a></li>
                 <!-- Button for upload new media -->
                 <li><a href="../media/media_upload.php">Upload New Media</a></li>
-                <!-- Button for Playlists -->
-                <li><a href="#">Playlists</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-music fa-stack-1x "></i></span>Playlist</a>
+              <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                <!-- Button for showing all playlists-->
+                <li><a href="../playlist/view_playlist.php">Your Playlists</a></li>
+                <!-- Button to create a new playlist -->
+                <li><a href="../playlist/create_playlist.php">Create New Playlist</a></li>
               </ul>
             </li>
             <li>
               <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-heart fa-stack-1x "></i></span>Favorites</a>
+              <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                <!-- Button for showing all favorite lists -->
+                <li><a href="../favoritelist/view_favoritelist.php">Your Favorite Lists</a></li>
+                <!-- Button to create a new favorite list -->
+                <li><a href="../favoritelist/create_favoritelist.php">Create New Favorite List</a></li>
+              </ul>
             </li>
             <li>
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Downloaded Media</a>
+              <a href="../media/view_downloaded.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Downloaded Media</a>
             </li>
             <li>
                 <a href="../contact/contact.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Contact</a>
@@ -128,18 +149,8 @@ $msg_id = $_GET['msg_id']; //from message.php, $_POST doesn't work
               <a href="../message/message.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-envelope-square fa-stack-1x "></i></span>Message</a>
             </li>
             <li>
-              <a href="../discussion/disucssion.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-comments fa-stack-1x "></i></span>Discussion</a>
+              <a href="../discussion/discussion.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-comments fa-stack-1x "></i></span>Discussion</a>
             </li>
-            <li>
-              <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Events</a>
-            </li>
-            <li>
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-youtube-play fa-stack-1x "></i></span>About</a>
-            </li>
-            <li>
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
-            </li>
-
             <li>
               <a href="../login_register/logout.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Logout</a>
             </li>

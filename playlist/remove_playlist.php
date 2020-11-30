@@ -1,6 +1,10 @@
 <?php
 session_start();
 include_once "../function.php";
+if(!$_SESSION["username"]){
+  header("Location: ../login_register/login.php");
+  exit();
+}
 $playlistid = $_GET['listid'];
 // use inner join to delete playlist records from two tables
 $query1 = "delete from playlistmedia where playlistid='$playlistid'";

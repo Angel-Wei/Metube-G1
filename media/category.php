@@ -27,37 +27,6 @@
 a{
   color:#1b6ca8;
 }
-.dropbtn {
-  color: #ffc93c;
-	background-color: #07689f;
-  padding: 16px;
-	padding-top: 11px;
-  font-size: 16px;
-  border: none;
-	text-align: center;
-	margin: 4px 2px;
-  cursor: pointer;
-	border-radius: 12px;
-}
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  z-index: 1;
-}
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-.dropdown-content a:hover {background-color: #ddd;}
-.dropdown:hover .dropdown-content {display: block;}
 div.gallery {
   margin: 5px;
   border: 2px solid #ccc;
@@ -108,8 +77,12 @@ td:last-child {
           <div class="navbar-header">
               <!-- Button for smallest screens -->
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-              <a class="navbar-brand" href="../index.php">
-                  <img src="../assets/images/logo.png" alt="Techro HTML5 template"></a>
+							<form name='search_form' method='GET' action='../search/search.php'
+										onsubmit='return validateForm()' enctype='multipart/form-data'>
+							<a class="navbar-brand" href="../index.php"><img src="../assets/images/logo.png" alt="MeTube"></a>
+							<input name='search' type='text' style="margin-top:10px;margin-left:30px" size="20" placeholder="Search.."></input>
+							<button type="submit" name="submit"><i class="fa fa-search"></i> </button>
+							</form>
           </div>
           <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav pull-right mainNav">
@@ -118,30 +91,31 @@ td:last-child {
                   if (isset($_SESSION['username']) && isset($_SESSION['success'])) {
                     echo "
                     <li><a href='../account/profile.php'>".$_SESSION['username']."</a></li>
-										<div class='dropdown'>
-										<button class='dropbtn'>BROWSE</button>
-										<div class='dropdown-content'>
-                    <a href='media_browse.php'>Browse All</a>
-										<a href='category.php?category=Image&order=default'>Browse Image</a>
-										<a href='category.php?category=Audio&order=default'>Browse Audio</a>
-										<a href='category.php?category=Video&order=default'>Browse Video</a>
-										</div>
-										</div>";
+										<li class='dropdown'>
+											<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Browse<b class='caret'></b></a>
+											<ul class='dropdown-menu'>
+												<li><a href='media_browse.php'>Browse All</a></li>
+												<li><a href='category.php?category=Image'>Browse Image</a></li>
+												<li><a href='category.php?category=Audio'>Browse Audio</a></li>
+												<li><a href='category.php?category=Video'>Browse Video</a></li>
+												<li><a href='../search/word_cloud.php'>Word Cloud</a></li>
+											</ul>
+										</li>";
                   }
                   else {
                     echo "
                       <li><a href='../login_register/login.php' style='border:1px;border-style:solid; border-radius: 25px; border-color:#9a496b;'   >Login</a></li>
                       <li><a href='../login_register/register.php'>Register</a></li>
-											<div class='dropdown'>
-											<button class='dropbtn'>BROWSE</button>
-											<div class='dropdown-content'>
-                      <a href='media_browse.php'>Browse All</a>
-											<a href='category.php?category=Image&order=default'>Browse Image</a>
-											<a href='category.php?category=Audio&order=default'>Browse Audio</a>
-											<a href='category.php?category=Video&order=default'>Browse Video</a>
-											</div>
-											</div>
-                      ";
+											<li class='dropdown'>
+												<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Browse<b class='caret'></b></a>
+												<ul class='dropdown-menu'>
+													<li><a href='media_browse.php'>Browse All</a></li>
+													<li><a href='category.php?category=Image'>Browse Image</a></li>
+													<li><a href='category.php?category=Audio'>Browse Audio</a></li>
+													<li><a href='category.php?category=Video'>Browse Video</a></li>
+													<li><a href='../search/word_cloud.php'>Word Cloud</a></li>
+												</ul>
+											</li>";
                   }
                   ?>
               </ul>
@@ -156,21 +130,21 @@ td:last-child {
     {
       echo "<p class = 'center'>Welcome ".$_SESSION['username']."!</p>";
 			echo "<a class='center' href='media_upload.php' style='color:#07689f;'>Upload File &nbsp;</a>";
-			echo "<div class='dropdown'>";
     }
     else
     {
       echo "<p class='center'>Welcome to the MeTube! <a href='../login_register/register.php' style='color:#07689f;'>Want to be a user? Register here!</a></p>";
-			echo "<div style='margin-left:150px;' class='dropdown'>";
     }
   ?>
-	<button class='dropbtn' style="color:#706897; background-color:#ebcfc4; border-radius:30px">Sort by</button>
-	<div class='dropdown-content'>
-	<a href='category.php?category=<?php echo $_GET['category'];?>&order=Name'>Title</a>
-	<a href='category.php?category=<?php echo $_GET['category'];?>&order=Viewcount'>Mostly Viewd</a>
-	<a href='category.php?category=<?php echo $_GET['category'];?>&order=Uploadtime'>Most Recently Uploaded</a>
-	</div>
-	</div></br>
+		<li class='dropdown' style="margin-left:150px;">
+		<a href='#' class='dropdown' data-toggle='dropdown'>Sort by<b class='caret'></b></a>
+		<ul class='dropdown-menu'>
+			<li><a href='category.php?category=<?php echo $_GET['category'];?>&order=Name'>Title</a></li>
+			<li><a href='category.php?category=<?php echo $_GET['category'];?>&order=Viewcount'>Mostly Viewd</a></li>
+			<li><a href='category.php?category=<?php echo $_GET['category'];?>&order=Uploadtime'>Most Recently Uploaded</a></li>
+		</ul>
+	</li>
+	<br></br>
   <h4 style="padding-left:600px;">Click to view detailed information.</h4>
 
   <?php
@@ -257,7 +231,30 @@ td:last-child {
   window.location='media_browse.php';</script>";
 ?>
 
+<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+<script src="assets/js/modernizr-latest.js"></script>
+<script type='text/javascript' src='../assets/js/jquery.min.js'></script>
+	<script type='text/javascript' src='../assets/js/fancybox/jquery.fancybox.pack.js'></script>
 
+	<script type='text/javascript' src='../assets/js/jquery.mobile.customized.min.js'></script>
+	<script type='text/javascript' src='../assets/js/jquery.easing.1.3.js'></script>
+	<script type='text/javascript' src='../assets/js/camera.min.js'></script>
+	<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/custom.js"></script>
+	<script>
+	jQuery(function(){
 
+		jQuery('#camera_wrap_4').camera({
+			height: '600',
+			loader: 'bar',
+			pagination: false,
+			thumbnails: false,
+			hover: false,
+			opacityOnGrid: false,
+			imagePath: '../assets/images/'
+		});
+
+	});
+</script>
 </body>
 </html>
