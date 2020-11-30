@@ -1,6 +1,10 @@
 <?php
 session_start();
 include_once "../function.php";
+if(!$_SESSION["username"]){
+  header("Location: ../login_register/login.php");
+  exit();
+}
 $favoritelistid = $_GET['favoritelistid'];
 $mediaid = $_GET['mediaid'];
 $result = mysql_query("delete from favoritelistmedia where favoritelistid='$favoritelistid' and mediaid='$mediaid'")

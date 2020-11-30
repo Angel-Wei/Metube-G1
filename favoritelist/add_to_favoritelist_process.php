@@ -1,7 +1,10 @@
 <?php
 session_start();
 include "../function.php";
-
+if(!$_SESSION["username"]){
+  header("Location: ../login_register/login.php");
+  exit();
+}
 if(isset($_POST['submit']) and isset($_GET['id']))
 {
   $profile = get_user_profile($_SESSION['username']);

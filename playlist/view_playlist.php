@@ -2,7 +2,8 @@
 include "../function.php";
 session_start();
 if(!$_SESSION["username"]){
-  echo "<meta http-equiv=\"refresh\" content=\"0;url=../login_register/login.php\">";
+  header("Location: ../login_register/login.php");
+  exit();
 }
 ?>
 <!DOCTYPE html>
@@ -28,10 +29,12 @@ a{
 </script>
 </head>
 <?php
-$user = $_SESSION['username'];
-$upper_user = strtoupper($user);
-$profile = get_user_profile($user);
-$accountid = $profile[0];
+if($_SESSION["username"]) {
+  $user = $_SESSION['username'];
+  $upper_user = strtoupper($user);
+  $profile = get_user_profile($user);
+  $accountid = $profile[0];
+}
 ?>
 <body>
   <nav class="navbar navbar-default no-margin">
@@ -46,8 +49,12 @@ $accountid = $profile[0];
                     </button>
                   "
                   ?>
-                  <a class="navbar-brand" href="../index.php"> <img src="../assets/images/logo.png" style="margin:-15px 10px 40px 0px"  width="190" alt="MeTube"></a>
-                  <input type="text" style="margin-top:10px;margin-left:30px" size="25" placeholder="Search..">
+                  <form name='search_form' method='GET' action='../search/search.php'
+                        onsubmit='return validateForm()' enctype='multipart/form-data'>
+                  <a class="navbar-brand" href="../index.php"><img src="../assets/images/logo.png" style="margin:-15px 10px 40px 0px"  width="190" alt="MeTube"></a>
+                  <input name='search' type='text' style="margin-top:15px;margin-left:30px" size="20" placeholder="Search.."></input>
+                  <button type="submit" name="submit"><i class="fa fa-search"></i> </button>
+                  </form>
 
               </div><!-- navbar-header-->
 
@@ -69,6 +76,9 @@ $accountid = $profile[0];
       <div id="sidebar-wrapper">
 
         <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+          <li>
+            <a href="../index.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-home fa-stack-1x "></i></span>Home </a>
+          </li>
             <li>
               <a href="../account/profile.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Profile </a>
             </li>
@@ -80,7 +90,7 @@ $accountid = $profile[0];
               </ul>
             </li>
             <li class="active">
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-video-camera fa-stack-1x "></i></span>Playlist</a>
+              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-music fa-stack-1x "></i></span>Playlist</a>
               <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                 <!-- Button for showing all playlists -->
                 <li class="active"><a href="view_playlist.php">Your Playlist</a></li>
@@ -108,15 +118,6 @@ $accountid = $profile[0];
             </li>
             <li>
               <a href="../discussion/discussion.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-comments fa-stack-1x "></i></span>Discussion</a>
-            </li>
-            <li>
-              <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Events</a>
-            </li>
-            <li>
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-youtube-play fa-stack-1x "></i></span>About</a>
-            </li>
-            <li>
-              <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
             </li>
             <li>
               <a href="../login_register/logout.php"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sign-out fa-stack-1x "></i></span>Logout</a>
@@ -164,7 +165,7 @@ $accountid = $profile[0];
                 <th class="th3">Remove from playlist</th>
               </tr>
               <?php
-              $query2 = "select title, username from media m join playlistmedia p on m.mediaid=p.mediaid and p.playlistid='$playlistid'";
+              $query2 = "select * from media m join playlistmedia p on m.mediaid=p.mediaid and p.playlistid='$playlistid'";
               $result2 = mysql_query($query2)
                 or die ("Retrieving media from playlist failed. Could not query the database: <br/>". mysql_error());
               $count2 = mysql_num_rows($result2);
@@ -172,20 +173,14 @@ $accountid = $profile[0];
               {
                 while($result_row2 = mysql_fetch_row($result2))
                 {
-                  $title = addslashes($result_row2[0]); // add backslashes added before characters that need to be escaped.
-                  $query3 = "select mediaid from media where title='$title'";
-                  $result3 = mysql_query($query3)
-                  or die ("Could not query the database: <br/>". mysql_error());
-                  $result_row3 = mysql_fetch_row($result3);
-                  $mediaid = $result_row3[0];
+                  $mediaid = $result_row2[0];
               ?>
               <tr valign="middle">
-                <td class="th1"><a href="../media/media_view.php?id=<?php echo $mediaid;?>"><?php echo $result_row2[0];?></a></td>
+                <td class="th1"><a href="../media/media_view.php?id=<?php echo $mediaid;?>"><?php echo $result_row2[3];?></a></td>
                 <td class="th2"><?php echo $result_row2[1];?></td>
                 <td class='td3'><a target="_self" href='remove_media.php?playlistid=<?php echo $playlistid;?>&mediaid=<?php echo $mediaid;?>'>Remove</a></td>
               </tr>
         <?php
-                  mysql_free_result($result3);
                 }
                 mysql_free_result($result2);
               }

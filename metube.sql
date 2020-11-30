@@ -203,3 +203,24 @@ CREATE TABLE IF NOT EXISTS `favoritelistmedia` (
   FOREIGN KEY (favoritelistid) REFERENCES favoritelist(favoritelistid),
   FOREIGN KEY (mediaid) REFERENCES media(mediaid)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+
+
+CREATE TABLE IF NOT EXISTS `topic` (
+  `topicid` int(11) NOT NULL AUTO_INCREMENT,
+  `topic` varchar(64),
+  `creator` int(11) NOT NULL,
+  `topic_create_time` varchar(64),
+  PRIMARY KEY (`topicid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `discussion` (
+  `discussid` int(11) NOT NULL AUTO_INCREMENT,
+  `topicid` int(11) NOT NULL,
+  `accountid` int(11) NOT NULL,
+  `content` varchar(240),
+  `post_time` varchar(64),
+  PRIMARY KEY (`discussid`),
+  FOREIGN KEY (topicid) REFERENCES topic(topicid),
+  FOREIGN KEY (accountid) REFERENCES account(accountid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

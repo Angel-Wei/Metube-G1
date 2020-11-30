@@ -1,6 +1,10 @@
 <?php
 session_start();
 include_once "../function.php";
+if(!$_SESSION["username"]){
+  header("Location: ../login_register/login.php");
+  exit();
+}
 // process the submitted form data
 if(!isset($_GET['id']))
 {

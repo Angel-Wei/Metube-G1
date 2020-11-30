@@ -1,5 +1,9 @@
 <?php
 include_once "../function.php";
+if(!$_SESSION["username"]){
+  header("Location: ../login_register/login.php");
+  exit();
+}
 $accountid1 = $_GET['accountid1'];
 $accountid2 = $_GET['accountid2'];
 

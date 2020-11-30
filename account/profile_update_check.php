@@ -1,9 +1,10 @@
 <?php
 include_once "../function.php";
-// if(!$_SESSION["username"]){
-//   echo "<meta http-equiv=\"refresh\" content=\"0;url=../login_register/login.php\">";
-// }
 session_start();
+if(!$_SESSION["username"]){
+  header("Location: ../login_register/login.php");
+  exit();
+}
 $user = $_SESSION['username'];
 $upper_user = strtoupper($user);
 $profile = get_user_profile($user);

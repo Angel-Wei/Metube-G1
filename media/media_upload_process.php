@@ -1,6 +1,10 @@
 <?php
 session_start();
 include_once "../function.php";
+if(!$_SESSION["username"]){
+  header("Location: ../login_register/login.php");
+  exit();
+}
 
 /******************************************************
 * upload document from user
@@ -86,7 +90,7 @@ if(isset($_POST['submit'])){
 						  or die("Insert into table upload error in media_upload_process.php " .mysql_error());
 					//redirect to the profile page and display message of succesfull upload
 					echo "<script type='text/javascript'>alert('The file is succesfully uploaded!');
-					window.location='../account/profile.php';</script>";
+					window.location='../media/media_upload.php';</script>";
 				}
 			}
 			else{

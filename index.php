@@ -24,6 +24,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script src="assets/js/html5shiv.js"></script>
 	<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
+	<script>
+	function validateForm() {
+		var content = document.forms["search_form"]["search"].value;
+		if (content == '') { return false;}
+		else { return true; }
+	}
+	</script>
+
+
 	<style>
 	div.gallery {
 	  margin: 5px;
@@ -50,9 +59,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<!-- Button for smallest screens -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
 
-				<a class="navbar-brand" href="index.php">
-					<img src="assets/images/logo.png" alt="MeTube"></a>
-					<input type="text" style="margin-top:10px;margin-left:30px" size="25" placeholder="Search..">
+					<form name='search_form' method='GET' action='./search/search.php'
+								onsubmit='return validateForm()' enctype='multipart/form-data'>
+					<a class="navbar-brand" href="index.php"><img src="assets/images/logo.png" alt="MeTube"></a>
+					<input name='search' type='text' style="margin-top:10px;margin-left:30px" size="20" placeholder="Search.."></input>
+					<button type="submit" name="submit"><i class="fa fa-search"></i> </button>
+					</form>
 			</div>
 
 
@@ -66,8 +78,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<a href='#' class='dropdown-toggle' data-toggle='dropdown'> {$_SESSION['username']} <b class='caret'></b></a>
 							<ul class='dropdown-menu'>
 								<li><a href='account/profile.php'>Account</a></li>
-								<li><a href='#'>Dummy Link1</a></li>
-								<li><a href='#'>Dummy Link2</a></li>
 								<li><a href='login_register/logout.php'>Log out</a></li>
 							</ul>
 						</li>
@@ -78,6 +88,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<li><a href='media/category.php?category=Image'>Browse Image</a></li>
 								<li><a href='media/category.php?category=Audio'>Browse Audio</a></li>
 								<li><a href='media/category.php?category=Video'>Browse Video</a></li>
+								<li><a href='search/word_cloud.php'>Word Cloud</a></li>
 							</ul>
 						</li>";
 					}
@@ -92,6 +103,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<li><a href='media/category.php?category=Image'>Browse Image</a></li>
 									<li><a href='media/category.php?category=Audio'>Browse Audio</a></li>
 									<li><a href='media/category.php?category=Video'>Browse Video</a></li>
+									<li><a href='search/word_cloud.php'>Word Cloud</a></li>
 								</ul>
 							</li>
 							";

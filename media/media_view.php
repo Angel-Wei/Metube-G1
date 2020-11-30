@@ -48,8 +48,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="navbar-header">
                 <!-- Button for smallest screens -->
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                <a class="navbar-brand" href="../index.php">
-                    <img src="../assets/images/logo.png" alt="Techro HTML5 template"></a>
+								<form name='search_form' method='GET' action='../search/search.php'
+	    								onsubmit='return validateForm()' enctype='multipart/form-data'>
+	    					<a class="navbar-brand" href="../index.php"><img src="../assets/images/logo.png" alt="MeTube"></a>
+	    					<input name='search' type='text' style="margin-top:10px;margin-left:30px" size="20" placeholder="Search.."></input>
+	    					<button type="submit" name="submit"><i class="fa fa-search"></i> </button>
+	    					</form>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav pull-right mainNav">
@@ -174,7 +178,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						}
 					}
 					// only when current user is the one who uploads the media, the sharing mode and comment permissions will be shown
-					if($_SESSION['username']==$uploaded_by)
+					if(isset($_SESSION['username']) and $_SESSION['username']==$uploaded_by)
 					{
 ?>
 						<h5 style="line-height:20px;">Current Sharing Mode: <b><?php echo $access;?></b>
@@ -245,5 +249,32 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		    <input style="width:100px; height:20px" name="submit" type="submit" value="Submit">
 			</form>
 		</div>
+
+
+		<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+		<script src="assets/js/modernizr-latest.js"></script>
+		<script type='text/javascript' src='../assets/js/jquery.min.js'></script>
+			<script type='text/javascript' src='../assets/js/fancybox/jquery.fancybox.pack.js'></script>
+
+			<script type='text/javascript' src='../assets/js/jquery.mobile.customized.min.js'></script>
+			<script type='text/javascript' src='../assets/js/jquery.easing.1.3.js'></script>
+			<script type='text/javascript' src='../assets/js/camera.min.js'></script>
+			<script src="../assets/js/bootstrap.min.js"></script>
+			<script src="../assets/js/custom.js"></script>
+			<script>
+			jQuery(function(){
+
+				jQuery('#camera_wrap_4').camera({
+					height: '600',
+					loader: 'bar',
+					pagination: false,
+					thumbnails: false,
+					hover: false,
+					opacityOnGrid: false,
+					imagePath: '../assets/images/'
+				});
+
+			});
+		</script>
 </body>
 </html>

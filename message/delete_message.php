@@ -1,7 +1,10 @@
 <?php
 session_start();
 include_once "../mysqlClass.inc.php";
-
+if(!$_SESSION["username"]){
+  header("Location: ../login_register/login.php");
+  exit();
+}
 
 if (isset($_POST['delete_msg'])) {
 

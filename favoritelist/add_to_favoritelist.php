@@ -1,10 +1,11 @@
 <?php
 	session_start();
 	include "../function.php";
+
   // only registered users are able to add media to their favorite lists
   if(!isset($_SESSION['username']))
   {
-    echo "<script type='text/javascript'>alert('This action is for registered users only.');
+		echo "<script type='text/javascript'>alert('This action is for registered users only.');
     window.location='../media/media_browse.php';</script>";
   }
   else
