@@ -172,7 +172,7 @@ mysql_free_result($result);
                       <br>
 
                       <table class='head'>
-                        <caption style='font-size:16px;margin-bottom:5px; text-align:left;color:orange;'>Choose a Topic</caption>
+                        <caption style='font-size:16px;margin-bottom:5px; text-align:left;color:orange;'>Choose another Topic</caption>
                         <tr>
                         <th class='th2'>Topic</th>
                         <th class='th3'>Creator</th>
@@ -187,7 +187,7 @@ mysql_free_result($result);
                       while($row = mysql_fetch_row($result)) {
                         $topicid= $row[0];
                         $creator = $row[2];
-                        $result_taken = mysql_query( "select accountid from discussion WHERE topicid='$topicid' and accountid='$'" );
+                        $result_taken = mysql_query( "select accountid from discussion WHERE topicid='$topicid' and accountid='$accountid'" );
                         if ($creator != $accountid and mysql_num_rows($result_taken) == 0) {
                           $topic= $row[1];
                           $create_time = $row[3];

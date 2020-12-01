@@ -37,7 +37,6 @@ mysql_free_result($result);
             alert("Both subject and content should be filled out!");
             return false;
       } else {
-            alert("Message sent.");
             return true;
       }
     }
@@ -170,7 +169,6 @@ mysql_free_result($result);
                                   echo "&nbsp &nbsp <span style='color:red'>Please edit your contact list first!</span>";
                                 }
                                ?>
-
                             </td>
                           </tr>
                           <tr>
