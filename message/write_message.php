@@ -58,8 +58,12 @@ mysql_free_result($result);
                     </button>
                   "
                   ?>
-                  <a class="navbar-brand" href="../index.php"> <img src="../assets/images/logo.png" style="margin:-15px 10px 40px 0px"  width="190" alt="MeTube"></a>
-                  <input type="text" style="margin-top:10px;margin-left:30px" size="25" placeholder="Search..">
+                  <form name='search_form' method='GET' action='../search/search.php'
+                        onsubmit='return validateForm()' enctype='multipart/form-data'>
+                  <a class="navbar-brand" href="../index.php"><img src="../assets/images/logo.png" style="margin:-15px 10px 40px 0px"  width="190" alt="MeTube"></a>
+                  <input name='search' type='text' style="margin-top:15px;margin-left:30px" size="20" placeholder="Search.."></input>
+                  <button type="submit" name="submit"><i class="fa fa-search"></i> </button>
+                  </form>
 
               </div><!-- navbar-header-->
 
@@ -148,9 +152,11 @@ mysql_free_result($result);
                             <td class='td7'>
                               <select name='send_to'>
                                 <?php
+                                $contact_count = 0;
                                 $result = mysql_query( "select * from contact where accountid1='$accountid1' && type!=0 " )
                                       or die("Could not query the contact database: <br />". mysql_error());;
                               	while($row = mysql_fetch_row($result)) {
+                                  $contact_count++;
                                   $accountid2 = $row[2];
                                   $result_name = mysql_query( "select * from account where accountid='$accountid2'" );
                                   $row_name = mysql_fetch_row($result_name);
@@ -159,8 +165,12 @@ mysql_free_result($result);
                                   mysql_free_result($result_name);
                                 }
                                 mysql_free_result($result);
-                                 ?>
-                              </select>
+                                echo "</select>";
+                                if (!$contact_count) {
+                                  echo "&nbsp &nbsp <span style='color:red'>Please edit your contact list first!</span>";
+                                }
+                               ?>
+
                             </td>
                           </tr>
                           <tr>
