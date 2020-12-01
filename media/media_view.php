@@ -228,8 +228,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 		<hr style="width:80%; border-top: 3px solid #ccc;">
 		<div class="center" style="border-style:none; text-align: left; vertical-align: top; line-height: 10px;"> <!--Comment and scoring session-->
+			<p style='margin-left:30px;background-color:#fddb3a;color:black;padding:5px 0px 5px 0px'> Comments: </p>
+			<?php
+			$id = $_GET['id'];
+			$result_comment = mysql_query( "select username, comment, submission_time from comment WHERE mediaid='$id' ");
+			while($row = mysql_fetch_row($result_comment)) {
+				echo "<p style='margin-left:30px;'><span style='color:black'> <strong>$row[0]:</strong> $row[1] </span> &nbsp &nbsp
+									 <span style='color:grey'> ($row[2])</span></p>";
+			}
+			mysql_free_result($result_comment);
+			?>
+			<br><br>
 			<form method="post" action="../comment/comment_process.php?id=<?php echo $_GET['id'];?>" enctype="multipart/form-data">
-				<textarea style="margin-left:30px; font-family: Helvetica;" name="comment" rows="8" cols="60">Comment here: </textarea>
+				<textarea style="margin-left:30px; font-family: Helvetica;" name="comment" rows="8" cols="60" placeholder="Comment here: "></textarea>
 				</br></br>
 				<label style="margin-left:30px;" for="score">Rate the media: </label>
 		    <select name="score" id="score">

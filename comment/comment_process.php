@@ -24,8 +24,9 @@ if(isset($_POST['submit']))
 {
   // check if all the blanks are filled in
   if (empty($_POST['comment'])||empty($_POST['score'])){
-		echo "<script type='text/javascript'>alert('Please provide the title, description, and keyword information.');
+		echo "<script type='text/javascript'>alert('Please fill both the comments and score.');
 		window.location='../media/media_view.php?id=$mediaid';</script>";
+    exit();
 	}
 
 	$comment = mysql_real_escape_string($_POST['comment']);
