@@ -9,6 +9,6 @@ Overall, the MeTube project has implemented five parts including:
 2) Data sharing;
 3) Media organization;
 4) User interaction;
-5) Search.
+5) Search. </br>
 Detailed database & relation schema, basic & advanced functions implemented under each
 major part, and testing cases will be shown in the following sections.
